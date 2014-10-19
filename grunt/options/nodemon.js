@@ -1,4 +1,4 @@
-// Use nodemon to run server in debug mode with an initial breakpoint
+// nodemon
 module.exports = {
   debug: {
     script: 'server/app.js',

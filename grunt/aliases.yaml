@@ -1,0 +1,4 @@
+default:
+  - 'newer:jshint'
+  - 'test'
+  - 'build'
