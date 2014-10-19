@@ -35,9 +35,22 @@ module.exports = function (grunt) {
   require('load-grunt-config')(grunt, {
     configPath: path.join(process.cwd(), 'grunt'),
     overridePath: path.join(process.cwd(), 'grunt/options'),
-    data: CONFIG
+    data: CONFIG,
+    // disable automatic load of grunt tasks and let jit-grunt handle it
+    loadGruntTasks: false
   });
 
+  // lazy load necessary tasks.
+  require('jit-grunt')(grunt, {
+    express: 'grunt-express-server',
+    useminPrepare: 'grunt-usemin',
+    ngtemplates: 'grunt-angular-templates',
+    cdnify: 'grunt-google-cdn',
+    protractor: 'grunt-protractor-runner',
+    injector: 'grunt-asset-injector',
+    buildcontrol: 'grunt-build-control',
+    customTasksDir: 'custom/serve.js'
+  });
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);

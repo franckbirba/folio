@@ -15,3 +15,6 @@ In case something breaks, make sure the paths point to the right dependencies.
     customTasksDir: 'custom/serve.js'
   });
 ````
+
+In the current configuration, jit-grunt is used to lazy load resources.
+load-grunt-config automatic require is placed to false.

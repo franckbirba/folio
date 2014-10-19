@@ -24,6 +24,6 @@ module.exports = {
     'jade',
     'stylus',
     'imagemin',
-    'svgmin'
+    // 'svgmin'
   ]
 }
