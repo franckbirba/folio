@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "connect-livereload": "~0.4.0",
+    "faker": "^2.0.1",
     "glob": "^4.0.6",
     "grunt": "~0.4.4",
     "grunt-angular-templates": "^0.5.4",

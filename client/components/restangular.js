@@ -2,7 +2,7 @@
   'use strict';
 
   function RestangularConfig(RestangularProvider){
-    RestangularProvider.setBaseUrl('/crud');
+    RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({id: "_id"});
     RestangularProvider.addResponseInterceptor( function(data, operation, what, url, response, deferred) {
       var extractedData;
