@@ -1,0 +1,66 @@
+
+<h3 class="build-title">Création d'un Bail (étape {{leaseStep}}): Certifications</h3>
+<!-- First Container scrollable -->
+<div class="container-fluid" style="padding: 10px; border: 1px solid #eeeeee;">
+	<div class="inner-container">
+		<div class="build-thumb" ng-repeat="img in CERTS">
+			<img  height="100px" width="150px" src="{{img.src}}"  class="">
+			<input type="checkbox">
+			<textarea  style="border-width:thin;border-style:solid;border-color:#eeeeee;width:100%;height:100px;margin-top: 20px;" placeholder="version,détails:"/>
+		</div>
+	</div>
+	<button class="btn btn-primary glyphicon glyphicon-plus"></button>
+</div><hr>
+<!-- Second Container -->
+<div class="container-fluid" style="padding: 10px; border: 1px solid #eeeeee;background: #eeeeee;">
+	<h3>Appréciation qualitative du Confort</h3>
+	<!-- Form Zone-->
+	<form role="form" class="form-horizontal" style="width:50%;float:left;" name="form" ng-submit="" novalidate style="position:relative">
+		<div class="form-group">
+			<label for="portfolio" class="col-sm-2 control-label">Acoustique</label>
+			<div class="col-sm-10 input-group" style="width: 473px;">
+				<select class="selectpicker">
+					<option>(vide)</option>
+					<option>Bon</option>
+					<option>Moyen</option>
+					<option>Mauvais</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="portfolio" class="col-sm-2 control-label">Visuel</label>
+			<div class="col-sm-10 input-group" style="width: 473px;">
+				<select class="selectpicker">
+					<option>(vide)</option>
+					<option>Bon</option>
+					<option>Moyen</option>
+					<option>Mauvais</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="portfolio" class="col-sm-2 control-label">Thermique</label>
+			<div class="col-sm-10 input-group" style="width: 473px;">
+				<select class="selectpicker">
+					<option>(vide)</option>
+					<option>Bon</option>
+					<option>Moyen</option>
+					<option>Mauvais</option>
+				</select>
+			</div>
+		</div>
+	</form>
+
+	<!-- Indice Zone-->
+	<div style="width:25%;float:left;height: 169px; padding: 10px;">
+		<div class="barTemp">
+		</div>
+		<h3>Indice de confort global</h3>
+		<a href="" class="btn btn-lg btn-primary">%</a>
+	</div>
+
+	<!-- Commentaire Zone-->
+	<div style="width:25%;float:left;height: 169px;">
+		<textarea style="height:100%; width:100%;border-width:thin;border-style:solid;border-color:#eeeeee;" placeholder="Commentaires: retours utilisateurs"></textarea>
+	</div>
+</div>

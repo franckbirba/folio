@@ -6,7 +6,15 @@ angular.module 'eportfolioApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'pascalprecht.translate',
+  'rssServices',
+  'restangular',      # called with RestangularProvider
+  'buildingMdl',
+  'portfolioMdl',
+  'observatoryMdl',
+  'scenarioMdl',
+  'utilsMdl'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider

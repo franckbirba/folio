@@ -1,0 +1,80 @@
+
+<div class="container">
+	<!-- Password Settings -->
+	<div class="col-md-12">
+		<h3>Change Password</h3>
+		<form class="form" name="form" ng-submit="changePassword(form)" novalidate style="background-color:#8faa00; border-radius:5px;">
+			<div class="form-group">
+				<label>Current Password</label>
+				<input type="password" name="password" class="form-control" ng-model="user.oldPassword" mongoose-error/>
+				<p class="help-block" ng-show="form.password.$error.mongoose">
+					{{ errors.other }}
+				</p>
+			</div>
+			<div class="form-group">
+				<label>New Password</label>
+				<input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" ng-minlength="3" required/>
+				<p class="help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+					Password must be at least 3 characters.
+				</p>
+			</div>
+			<p class="help-block"> {{ message }} </p>
+			<button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+		</form>
+	</div> <!-- End Password Settings -->
+
+	<div class="row">
+		<h3>Coût de la construction</h3>
+		<div class="col-md-12" listedit data="indices"></div>
+	</div>
+
+	<div class="row">
+		<h2>Coefficients "fixes" de montage</h2>
+		<form name="form">
+
+			<div class="form-group">
+				<label for="portfolio" class="col-sm-2 control-label">Classique</label>
+				<div class="col-sm-10">
+					<input ng-model="coeffs.classique" type="text" name="classic" class="form-control" />
+				</div>
+				<label for="portfolio" class="col-sm-2 control-label">PPP</label>
+				<div class="col-sm-10">
+					<input ng-model="coeffs.ppp" type="text" name="ppp" class="form-control"/>
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+          <button ng-click="coeffs.update()">send</button>
+        </div>
+			</div>
+			<p class="help-block"> {{ message }} </p>
+		</form>
+	</div>
+
+	<div class="row">
+		<h2>Coût des Fluides</h2>
+
+    <script type="text/ng-template" id="newFluidModal.html">
+      <div class="modal-body">
+        type de fluide <select ng-model="choosenFluid" ng-options="fluidtype for fluidtype in fluidtypes"></select><br/>
+        fournisseur <select ng-model="choosenProvider" ng-options="provider for provider in providers"></select>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      </div>
+    </script>
+
+
+		<div class="col-md-12" listedit data="fluids"></div>
+	</div>
+
+	<div class="row">
+		<h2>Fluides</h2>
+		<div class="col-md-12" listedit data="fluidtypes"></div>
+	</div>
+
+	<div class="row">
+		<h2>Fournisseurs</h2>
+		<div class="col-md-12" listedit data="providers"></div>
+	</div>
+</div>
+

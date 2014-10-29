@@ -1,0 +1,71 @@
+<div class="">
+  <div class="panel panel-primary" style="position:relative">
+    <div class="panel-heading" style="display: inline-block; width: 100%">
+        <h4 class="panel-title" style="float: left">
+            <i class="{{icon}}"></i>
+            {{title}}
+        </h4>
+        <button class="btn btn-xs btn-primary" style="border:none;float: right;background-color: white;color:black;" ng-click="add()">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </div>
+    <div class="panel-body table-responsive" style="overflow:scroll;">
+        <!-- <form editable-form name="{{title}}"> -->
+        <table class="table table-bordered table-hover table-condensed tablesorter">
+          <thead>
+            <tr>
+              <th ng-repeat="col in cols" ng-click="$parent.reverse = $parent.predicate == col.name && !($parent.reverse); $parent.predicate = col.name">
+                {{col.name}}
+                <i class="fa {{getSortIcon(col.name)}}"></i>
+              </th>
+              <th class="title-edit" style="position: absolute; right: -55px;">
+                Edit
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="line" ng-repeat="row in rows track by $index| orderBy:stringifyPredicate(predicate):reverse">
+              <td ng-repeat="cell in cols" style="min-height: 31px;">
+                <span ng-if="!cell.type"  editable-text="row[cell.name]" e-name="{{cell.name}}" e-form="rowform">
+                  {{row[cell.name]}}
+                </span>
+                <a href="#" ng-if="cell.link && cell.type == 'multi'" editable-select="row[cell.name]" e-multiple e-name="{{cell.name}}" e-form="rowform" e-ng-options="s._id as s.name  for s in models[cell.link].rows">
+                  {{ showLink(cell, row) }}
+                </a>
+                <a href="#" ng-if="cell.link && cell.type =='single'" editable-select="row[cell.name]" e-name="{{cell.name}}" e-form="rowform" e-ng-options="s._id as s.name  for s in models[cell.link].rows">
+                  {{ showLink(cell, row) }}
+                </a>
+                <a href="#" ng-if="cell.type == 'checkbox'" e-form="rowform" editable-checkbox="row[cell.name]" e-name="{{cell.name}}">
+                  {{ row[cell.name] }}
+                </a>
+                <button ng-if="cell.type =='toggleaction'" class="btn btn-xs btn-primary {{getCls(row, 'running')}}" style="border:none;background-color: white;color:black;" ng-click="updateState(row, 'running')">
+                  <span class="glyphicon glyphicon-{{getState(row, 'running')}}"></span>
+                </button>
+    					  <button ng-if="cell.type =='action'" class="btn btn-xs btn-primary {{getCls(row, 'running')}}" style="border:none;background-color: white;color:black;" ng-click="doAction(row, 'apply')">
+                  <span class="glyphicon glyphicon-cloud-upload"></span>
+                </button>
+              </td>
+              <td style="white-space: nowrap;width:50px;">
+                <!-- form -->
+                <form editable-form name="rowform" onbeforesave="" onaftersave="save($data, row)" ng-show="rowform.$visible" class="form-buttons form-inline form-absolute" style="position: absolute; right: 5px; width: 50px;" shown="inserted == row">
+                  <input type="hidden" visibility="hidden!important;"  e-name="_id" e-form="rowform" e-value="row._id">
+                  <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-xs btn-success">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                  </button>
+                  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-xs btn-danger">
+                    <span class="glyphicon glyphicon glyphicon-thumbs-down"></span>
+                  </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible" style="position: absolute; right: -55px;">
+                  <button class="btn btn-xs btn-default" ng-click="rowform.$show()"><span class="glyphicon glyphicon-edit"></span></button>
+                  <button class="btn btn-xs btn-danger" ng-click="data.remove(row)"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--  </form> -->
+        <!-- onbeforesave="saveData($data, rowform)" -->
+    </div>
+  </div>
+</div>

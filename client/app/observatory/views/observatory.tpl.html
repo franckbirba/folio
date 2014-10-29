@@ -1,0 +1,72 @@
+
+<div class="container-fluid" ng-controller="UserCtrl">
+  <!-- <h3 class="glyphicon glyphicon-user">{{User.name}}</h3> -->
+  <div class="row">
+    <div class="col-md-5">
+      <!-- FOCUS PANEL-->
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="pull-left">Portfolios</h3>
+          <span class="pull-right">
+            <button class="glyphicon glyphicon-plus btn btn-xs btn-primary" ng-click="portFormShow = ! portFormShow ">
+            </button>
+          </span>
+          <div ng-show="portFormShow">
+            <h4>Creer un nouveau Portfolio</h4>
+            <port-form></port-form>
+          </div>
+        </div>
+        <div class="panel-body">
+          <port-list></port-list>
+        </div>
+      </div><!-- END FOCUS PANEL -->
+    </div>
+
+    <!-- SUMMARY PANEL -->
+    <div class="col-md-7">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="pull-left">Carte</h3>
+          <span class="pull-right">
+            <select class="form-control" ng-change="filterBuildingsByHqe(currentHqeType)" ng-model="currentHqeType" ng-selected="values.hqeTypes.all" ng-options="k as v for (k, v) in values.hqeTypes">
+            </select>
+          </span>
+        </div>
+
+        <div class="panel-body"><!-- GOOGLE MAP -->
+          <ui-gmap-google-map center="values.map.center" options='{styles:[{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]}' draggable="true" width="600px" style="width:600px;height:400px" zoom="values.map.zoom">
+            <markers models="observatory.buildings" coords="'position'" labelContent="'name'" showWindow="true">
+              <windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
+                <div>
+                  <p ng-non-bindable style="font-weight: bold; color: blue; font-size: 13px">{{ name }}</p>
+                  <p ng-non-bindable style="color: #999;">{{ position.formattedAddress }}</p>
+                    <p class="muted">
+                      <a href="">Some link 1</a> | <a href="">Some link 2</a> | <a href="">Some link 3</a>
+                    </p>
+                </div>
+              </windows>
+            </markers>
+          </ui-gmap-google-map>
+        </div><!-- END MAP -->
+        <div class="panel-heading clearfix">
+          <h3 class="pull-left">Visualisation</h3>
+          <span class="pull-right">
+            <select class="form-control" ng-change="filterByUsageType(currentUsageType)" id="select-by-usage-type" ng-model="currentUsageType" ng-options="k as v for (k, v) in values.usageTypes">
+            </select>
+          </span>
+        </div>
+        <div class="panel-body">
+          <div id="chart">
+            <svg></svg>
+          </div>
+        </div>
+      </div>
+    </div> <!-- END SUMMARY PANEL -->
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#createtab a').click(function (e) {
+    e.preventDefault();
+  });
+</script>

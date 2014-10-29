@@ -1,0 +1,60 @@
+{
+  "rental_status": [
+    "(empty)",
+    "vacant",
+    "rented",
+    "multi-tenants"
+  ],
+  "usage": [
+    "(empty)",
+    "office",
+    "commercial",
+    "residential"
+  ],
+  "igh": [
+    true,
+    false
+  ],
+  "erp_status": [
+    "cdp",
+    "erp cat 2",
+    "erp cat 3",
+    "erp cat 5"
+  ],
+  "grades": [
+    "(empty)",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "quality": [
+    "(empty)",
+    "good",
+    "average",
+    "bad"
+  ],
+  "technical_info": [
+    "(empty)",
+    "new or good condition (DVR > 10)",
+    "average condition (5 > DVR < 10)",
+    "bad condition (DVR < 5)"
+  ],
+  "conformity": [
+    "(empty)",
+    "conforme",
+    "minor non conformity",
+    "major non conformity"
+  ],
+  "length": [
+    "(empty)",
+    "month",
+    "trimester",
+    "semester",
+    "year",
+    "biannual"
+  ]
+}

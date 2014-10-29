@@ -1,0 +1,407 @@
+
+	<div class="container-fluid" style="margin-top:50px;">
+		<form role="form" class="form-horizontal" name="form" ng-submit="" novalidate >
+		<div class="build-info" style="width:100%">
+			<fieldset>
+				<label class="label-fieldset">Association des Actions aux Bâtiments</label>
+					<div class="panel panel-default apply">
+						<div class="widget-head">Actions types disponibles</div>
+						<div class="panel-body scroll-y">
+							<div class="checkbox" ng-repeat="action in ACTIONS">
+								<label>
+									<input type="checkbox">{{action.name}}
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default apply">
+						<div class="widget-head">Bâtiments</div>
+						<div class="panel-body scroll-y">
+							<div class="checkbox" ng-repeat="building in BUILDINGS">
+								<label>
+									<input type="checkbox">{{building.name}}
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			</div>
+		</form>
+
+		<div class="container" style="position:relative;margin-top:20px;padding: 0px;border: 1px solid #eeeeee;">
+			<!-- NAV -->
+			<ul class="nav nav-tabs" id="graphtab">
+				<li class="active">
+					<a href="#arbres" data-toggle="tab">Arbres</a>
+				</li>
+				<li>
+					<a href="#bulles" data-toggle="tab">Bulles</a>
+				</li>
+			</ul>
+			<!-- GRAPH CONTAINER -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="arbres">
+					<div class="container formulo">
+						<label class="control-label" for="inputSuccess4">Organiser</label>
+						<select class="form-control">
+							<option>Bâtiments / Actions</option>
+							<option>Actions / Bâtiments</option>
+						</select>
+					</div>
+					<div class="grapharbres">
+					</div>
+				</div>
+				<div class="tab-pane" id="bulles">
+					<div class="container formulo">
+						<label class="control-label" for="inputSuccess4">Organiser</label>
+						<select class="form-control">
+							<option>Bâtiments / Actions</option>
+							<option>Actions / Bâtiments</option>
+						</select>
+						<label class="control-label" for="inputSuccess4">Taille de la bulle</label>
+						<select class="form-control">
+							<option>Montant d'investissement / Economie d'énergie</option>
+							<option>Economie d'énergie / Montant d'investissement</option>
+						</select>
+						<div class="checkbox">
+							<label>
+								Coloriser les bulles par Lot Technique <input type="checkbox">
+							</label>
+						</div>
+					</div>
+					<div class="graphbulles">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- BULLES -->
+<style type="text/css">
+
+	body > svg {
+		position: absolute;
+		top: -80px;
+		left: -160px;
+	}
+
+	circle.node {
+		cursor: pointer;
+		stroke: #000;
+		stroke-width: .5px;
+	}
+
+	line.link {
+		fill: none;
+		stroke: #9ecae1;
+		stroke-width: 1.5px;
+	}
+</style>
+
+<!-- SCRIPT D3JS BULLES -->
+<script type="text/javascript">
+
+	$('#graphtab a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+
+
+	var w = 970,
+		h = 600,
+		node,
+		link,
+		root;
+
+	var force = d3.layout.force()
+		.on("tick", bullesTick)
+		.charge(function(d) { return d._children ? -d.size / 100 : -30; })
+		.linkDistance(function(d) { return d.target._children ? 80 : 30; })
+		.size([w, h - 160]);
+
+	var vis = d3.select(".graphbulles").append("svg:svg")
+		.attr("width", w)
+		.attr("height", h);
+
+	d3.json("data/bulles.json", function(json) {
+		root = json;
+		root.fixed = true;
+		root.x = w / 2;
+		root.y = h / 2 - 80;
+		bullesUpdate();
+	});
+
+	function bullesUpdate() {
+
+		var nodes = bullesFlatten(root),
+			links = d3.layout.tree().links(nodes);
+
+		// Restart the force layout.
+		force
+		.nodes(nodes)
+		.links(links)
+		.start();
+
+		// Update the links…
+		link = vis.selectAll("line.link")
+			.data(links, function(d) { return d.target.id; });
+
+		// Enter any new links.
+		link.enter().insert("svg:line", ".node")
+			.attr("class", "link")
+			.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+
+		// Exit any old links.
+		link.exit().remove();
+
+		// Update the nodes…
+		node = vis.selectAll("circle.node")
+			.data(nodes, function(d) { return d.id; })
+			.style("fill", bullesColor);
+
+		node.transition()
+			.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; });
+
+		// Enter any new nodes.
+		node.enter().append("svg:circle")
+			.attr("class", "node")
+			.attr("cx", function(d) { return d.x; })
+			.attr("cy", function(d) { return d.y; })
+			.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
+			.style("fill", bullesColor)
+			.on("click", bullesClick)
+			.call(force.drag);
+
+		// Exit any old nodes.
+		node.exit().remove();
+	}
+
+	function bullesTick() {
+		link.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+
+		node.attr("cx", function(d) { return d.x; })
+			.attr("cy", function(d) { return d.y; });
+	}
+
+	// Color leaf nodes orange, and packages white or blue.
+	function bullesColor(d) {
+		return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
+	}
+
+	// Toggle children on click.
+	function bullesClick(d) {
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
+		} else {
+			d.children = d._children;
+			d._children = null;
+		}
+		bullesUpdate();
+	}
+
+	// Returns a list of all nodes under the root.
+	function bullesFlatten(root) {
+		var nodes = [], i = 0;
+
+		function recurse(node) {
+			if (node.children) node.size = node.children.reduce(function(p, v) { return p + recurse(v); }, 0);
+			if (!node.id) node.id = ++i;
+			nodes.push(node);
+			return node.size;
+		}
+
+		root.size = recurse(root);
+		return nodes;
+	}
+</script>
+
+<!-- ARBRES CSS -->
+<style type="text/css">
+	rect {
+	  fill: none;
+	  pointer-events: all;
+	}
+
+	pre {
+	  font-size: 18px;
+	}
+
+	line {
+	  stroke: #000;
+	  stroke-width: 1.5px;
+	}
+
+	.node circle {
+		cursor: pointer;
+		fill: #fff;
+		stroke: steelblue;
+		stroke-width: 1.5px;
+	}
+
+	.node text {
+		font-size: 11px;
+	}
+
+	path.link {
+		fill: none;
+		stroke: #ccc;
+		stroke-width: 1.5px;
+	}
+</style>
+
+<!-- SCRIPT D3JS ARBRES -->
+
+
+
+<script type="text/javascript">
+	var m = [20, 120, 20, 120],
+		w = 970 - m[1] - m[3],
+		h = 600 - m[0] - m[2],
+		i = 0,
+		rootbis;
+
+	var tree = d3.layout.tree()
+		.size([h, w]);
+
+	var diagonal = d3.svg.diagonal()
+		.projection(function(d) { return [d.y, d.x]; });
+
+	var visBis = d3.select(".grapharbres").append("svg:svg")
+		.attr("width", w + m[1] + m[3])
+		.attr("height", h + m[0] + m[2])
+		.append("svg:g")
+		.attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+	d3.json("data/arbre.json", function(json) {
+		rootbis = json;
+		rootbis.x0 = h / 2;
+		rootbis.y0 = 0;
+
+		function toggleAll(d) {
+			if (d.children) {
+				d.children.forEach(toggleAll);
+				toggle(d);
+			}
+		}
+
+		// Initialize the display to show a few nodes.
+		rootbis.children.forEach(toggleAll);
+		toggle(rootbis.children[1]);
+		toggle(rootbis.children[1].children[2]);
+		toggle(rootbis.children[9]);
+		toggle(rootbis.children[9].children[0]);
+
+		update(rootbis);
+	});
+
+	function update(source) {
+		var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+		// Compute the new tree layout.
+		var nodes = tree.nodes(rootbis).reverse();
+
+		// Normalize for fixed-depth.
+		nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+		// Update the nodes…
+		var node = visBis.selectAll("g.node")
+			.data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+		// Enter any new nodes at the parent's previous position.
+		var nodeEnter = node.enter().append("svg:g")
+			.attr("class", "node")
+			.attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+			.on("click", function(d) { toggle(d); update(d); });
+
+		nodeEnter.append("svg:circle")
+			.attr("r", 1e-6)
+			.style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+		nodeEnter.append("svg:text")
+			.attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+			.attr("dy", ".35em")
+			.attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+			.text(function(d) { return d.name; })
+			.style("fill-opacity", 1e-6);
+
+		// Transition nodes to their new position.
+		var nodeUpdate = node.transition()
+			.duration(duration)
+			.attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+		nodeUpdate.select("circle")
+			.attr("r", 4.5)
+			.style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+		nodeUpdate.select("text")
+			.style("fill-opacity", 1);
+
+		// Transition exiting nodes to the parent's new position.
+		var nodeExit = node.exit().transition()
+			.duration(duration)
+			.attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+			.remove();
+
+		nodeExit.select("circle")
+			.attr("r", 1e-6);
+
+		nodeExit.select("text")
+			.style("fill-opacity", 1e-6);
+
+		// Update the links…
+		var link = visBis.selectAll("path.link")
+			.data(tree.links(nodes), function(d) { return d.target.id; });
+
+		// Enter any new links at the parent's previous position.
+		link.enter().insert("svg:path", "g")
+			.attr("class", "link")
+			.attr("d", function(d) {
+				var o = {x: source.x0, y: source.y0};
+				return diagonal({source: o, target: o});
+			})
+		.transition()
+			.duration(duration)
+			.attr("d", diagonal);
+
+		// Transition links to their new position.
+		link.transition()
+			.duration(duration)
+			.attr("d", diagonal);
+
+		// Transition exiting nodes to the parent's new position.
+		link.exit().transition()
+			.duration(duration)
+			.attr("d", function(d) {
+			var o = {x: source.x, y: source.y};
+			return diagonal({source: o, target: o});
+		})
+		.remove();
+
+		// Stash the old positions for transition.
+		nodes.forEach(function(d) {
+			d.x0 = d.x;
+			d.y0 = d.y;
+		});
+	}
+
+	// Toggle children.
+	function toggle(d) {
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
+		} else {
+			d.children = d._children;
+			d._children = null;
+		}
+	}
+</script>

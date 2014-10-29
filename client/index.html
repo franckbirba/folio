@@ -18,6 +18,8 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/buildings/styles/building.css">
+      <link rel="stylesheet" href="app/observatory/styles/observatory.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
@@ -55,6 +57,12 @@
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/bluebird/js/browser/bluebird.js"></script>
+      <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+      <script src="bower_components/angular-translate/angular-translate.js"></script>
+      <script src="bower_components/restangular/dist/restangular.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -74,7 +82,46 @@
           <script src="components/mongoose-error/mongoose-error.js"></script>
           <script src="components/navbar/navbar.js"></script>
           <script src="components/socket/socket.js"></script>
+          <script src="app/buildings/buildingCfg.js"></script>
+          <script src="app/buildings/buildingCtrl.js"></script>
+          <script src="app/buildings/buildingFltr.js"></script>
+          <script src="app/buildings/buildingMdl.js"></script>
+          <script src="app/buildings/buildingSvc.js"></script>
+          <script src="app/buildings/leases/leaseCfg.js"></script>
+          <script src="app/buildings/leases/leaseCtrl.js"></script>
+          <script src="app/buildings/leases/leaseFltr.js"></script>
+          <script src="app/buildings/leases/leaseSvc.js"></script>
+          <script src="app/observatory/observatoryCfg.js"></script>
+          <script src="app/observatory/observatoryCtrl.js"></script>
+          <script src="app/observatory/observatoryMdl.js"></script>
+          <script src="app/observatory/observatorySvc.js"></script>
+          <script src="app/portfolios/portFormDir.js"></script>
+          <script src="app/portfolios/portListDir.js"></script>
+          <script src="app/portfolios/portfolioMdl.js"></script>
+          <script src="app/portfolios/portfolioSvc.js"></script>
+          <script src="app/scenarios/ActionManager.controller.js"></script>
+          <script src="app/scenarios/Actions.service.js"></script>
+          <script src="app/scenarios/ApplyActions.controller.js"></script>
+          <script src="app/scenarios/NewReferenceAction.controller.js"></script>
+          <script src="app/scenarios/ReferenceActionManager.controller.js"></script>
+          <script src="app/scenarios/ReferenceActions.service.js"></script>
+          <script src="app/scenarios/actionCtrl.js"></script>
+          <script src="app/scenarios/actionSvc.js"></script>
+          <script src="app/scenarios/scenarioCtrl.js"></script>
+          <script src="app/scenarios/scenarioMdl.js"></script>
+          <script src="app/settings/listeditDir.js"></script>
+          <script src="app/settings/settingsCtrl.js"></script>
+          <script src="components/autoform/autoform.module.js"></script>
+          <script src="components/autoform/directives/autoform.directive.js"></script>
+          <script src="components/autoform/directives/autoformfield.directive.js"></script>
+          <script src="components/autoform/directives/json.directive.js"></script>
+          <script src="components/autoform/directives/rating.directive.js"></script>
+          <script src="components/autoform/services/formLoader.service.js"></script>
+          <script src="components/googleMapsApi.js"></script>
+          <script src="components/restangular.js"></script>
+          <script src="components/rssServices.js"></script>
           <script src="components/socket/socket.service.js"></script>
+          <script src="components/utils.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>

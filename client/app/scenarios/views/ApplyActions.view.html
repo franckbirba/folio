@@ -1,0 +1,17 @@
+<form name="form">
+  <span ng-repeat-start="RefAction in ReferenceActions">
+    {{RefAction.name}}
+  </span>
+  <input type="checkbox" ng-model="RefAction.choosen">
+  <br ng-repeat-end >
+
+  <br/>
+
+  <span ng-repeat-start="Building in Buildings">
+    {{Building.name}}
+  </span>
+  <input type="checkbox" ng-model="Building.choosen" >
+  <br ng-repeat-end >
+
+  <button ng-click="apply()">APPLY</button>
+ </form>

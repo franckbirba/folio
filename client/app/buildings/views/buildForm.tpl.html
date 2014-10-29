@@ -1,0 +1,18 @@
+
+<div class="rows" ng-switch="buildStep">
+  <section class="col-md-8">
+    <div ng-switch-when="1">
+      <div ng-include src="'scripts/buildings/views/buildForm1.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setBuildStep(2)">Proceed</button>
+    </div>
+    <div ng-switch-when="2">
+      <div ng-include src="'scripts/buildings/views/buildForm2.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setBuildStep(1)">Back</button>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="saveBuilding()">Proceed</button>
+    </div>
+  </section>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker();
+</script>

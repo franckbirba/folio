@@ -1,0 +1,40 @@
+<div class="rows">
+  <aside class="col-md-2" style="height: 100%">
+    <h3>leases</h3>
+    <ul>
+      <li ng-repeat="lease in leases">{{lease._id}}</li>
+    </ul>
+  </aside>
+  <section class="col-md-8" ng-switch="leaseStep">
+    <button class="btn btn-lg btn-success" ng-click="setLeaseStep(1)">New Lease</button>
+    <div ng-switch-when="1">
+      <div ng-include src="'scripts/buildings/leases/views/leaseForm1.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(2)">Proceed</button>
+    </div>
+    <div ng-switch-when="2">
+      <div ng-include src="'scripts/buildings/leases/views/leaseForm2.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(1)">Back</button>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(3)">Proceed</button>
+    </div>
+    <div ng-switch-when="3">
+      <div ng-include src="'scripts/buildings/leases/views/leaseForm3.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(2)">Back</button>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(4)">Proceed</button>
+    </div>
+    <div ng-switch-when="4">
+      <div ng-include src="'scripts/buildings/leases/views/leaseForm4.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(3)">Back</button>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(5)">Proceed</button>
+    </div>
+    <div ng-switch-when="5">
+      <div ng-include src="'scripts/buildings/leases/views/leaseForm5.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(4)">Back</button>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(6)">Proceed</button>
+    </div>
+    <div ng-switch-when="6">
+      <div ng-include src="'scripts/buildings/leases/views/leaseForm6.html'"></div>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="setLeaseStep(5)">Back</button>
+      <button class="btn btn-lg btn-success btn-primary building-btn-next" ng-click="create()">Save</button>
+    </div>
+  </section>
+</div>

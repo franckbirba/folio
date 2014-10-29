@@ -1,0 +1,96 @@
+
+	<div class="container-fluid">
+		<ol class="breadcrumb" style="width:350px;font-size:20px;background-color:#F1F2F1;">
+			<li><a href="/observatory">Portefeuille1</a></li>
+			<li class="active">Bâtiment A</li>
+		</ol>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="buildingdetail">
+					<form role="form" class="form-horizontal" >
+						<div class="form-group">
+						  <div class="input-group">
+							<label for="portfolio" class="col-sm-4 control-label">Structure</label>
+							<div class="col-sm-8">
+							  <input class="form-control" placeholder="Structure"  type="text" disabled>
+							</div>
+						  </div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label">Façades</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control"  placeholder="Façades"  type="text" disabled >
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label">Production chaud</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control"  placeholder="Production chaud"  type="text" disabled >
+
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label" >TGBT</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control "  placeholder="TGBT" disabled type="text" disabled >
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label">Terminaux froids</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control col-sm-4"  placeholder="Terminaux froids"  type="text" disabled >
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label">Indice de confort global</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control"  placeholder="Indice de confort global"  type="text" disabled >
+						   <span class="input-group-addon">%</span>
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label">Indice de vétusté globale</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control"  placeholder="Indice de vétusté globale"  type="text" disabled >
+						   <span class="input-group-addon">%</span>
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="portfolio" class="col-sm-4 control-label">Indice de conformité globale</label>
+						<div class="col-sm-8 input-group">
+						   <input class="form-control"  placeholder="Indice de conformité globale"  type="text"disabled  >
+						   <span class="input-group-addon">%</span>
+						</div>
+					  </div>
+				  </form>
+				</div>
+			</div>
+			<!--
+			<div class="col-md-8">
+				<div class="buildingdetail">
+					<div class="row">
+						<div class="col-md-4">.col-md-4</div>
+						<div class="col-md-4">.col-md-4</div>
+						<div class="col-md-4">.col-md-4</div>
+					</div>
+				</div>
+			</div>
+
+			-->
+
+			<div class="col-md-4">
+
+				<form name="buildingForm" class="form-horizontal" role="form" ng-submit="update(building)">
+					<div class="form-group" ng-repeat="key in buildingkeys | deRestangularize">
+						<label for="{{key}}" class="col-sm-4 control-label">{{key}}</label>
+						<div class="col-sm-8 input-group">
+							<input class="form-control" name="{{key}}" data-ng-model="building[key]" placeholder="{{building[key]}}" type="text">
+						</div>
+					</div>
+					<input type="submit"></input>
+				</form>
+			</div>
+			<button ng-click="update()">Update</button>
+
+		</div>
+	</div>

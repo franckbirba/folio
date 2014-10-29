@@ -1,0 +1,10 @@
+<form>
+  Name  : <input type="text" ng-model="newRefAction.name"><br/>
+  About : <input type="text" ng-model="newRefAction.about"><br/>
+  Gisement : <select ng-model="newRefAction.gisement" ng-options="gisement for gisement in gisements">  </select><br/>
+  Montage : <select ng-model="newRefAction.montage" ng-options="montage for montage in montages">  </select><br/>
+  Lot technique concerne : <select ng-model="newRefAction.lot_tech" ng-options="lot_tech for lot_tech in lot_techs">  </select><br/>
+          <button ng-click="send(newRefAction)">
+            send
+          </button>
+</form>

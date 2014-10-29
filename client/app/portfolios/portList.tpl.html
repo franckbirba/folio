@@ -1,0 +1,32 @@
+
+<div class="list-group">
+  <div class="list-group-item clearfix" ng-repeat="portfolio in portfolios | hideModel">
+    <span class="pull-left">
+      <a class="btn" ng-click="portfolioCard = ! portfolioCard" href="">{{portfolio.name}}</a>
+    </span>
+    <span class="pull-right">
+      <button ng-click="portfolioDel(portfolio)">
+        <i class="fa fa-times"></i>
+      </button>
+    </span>
+    <div class="panel panel-default" ng-show="portfolioCard">
+      <div class="panel-body">
+        <div class="list-group clearfix">
+          <h4>Informations du Portfolio</h4>
+          <div class="list-group-item clearfix">
+            <a href="/portfolios/{{portfolio._id}}/buildings">
+              <h5 class="pull-left">{{"buildings" | printPortSummary}}</h5>
+              <span class="pull-right">{{portfolio.buildings.length}}</span>
+            </a>
+          </div>
+          <div class="list-group-item clearfix" ng-repeat="(key, value) in portfolio.summary">
+            <span>
+              <h5 class="pull-left">{{key | printPortSummary}}</h5>
+              <span class="pull-right">{{value}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

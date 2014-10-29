@@ -1,0 +1,123 @@
+
+	<div class="container-fuild" style="height: 100px;position: absolute; top: 70px; left: 0; right: 0;">
+		<div class="panel panel-default comp-panel left">
+		</div>
+		<div class="panel panel-default comp-panel right">
+
+		</div>
+	</div>
+	<div class="container-fuild" style="position: relative;margin: auto;margin-top: 250px;width:1000px">
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item comp-item active">
+					<div class="row">
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">
+								<img class="comp-img" src="..." alt="...">
+								<span>This is a caption</span>
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">
+								<img class="comp-img" src="..." alt="...">
+								<span>This is a caption</span>
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">
+								<img class="comp-img" src="..." alt="...">
+								<span>This is a caption</span>
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">
+								<img class="comp-img" src="..." alt="...">
+								<span>This is a caption</span>
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">
+								<img class="comp-img" src="..." alt="...">
+								<span>This is a caption</span>
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">
+								<img class="comp-img" src="..." alt="...">
+								<span>This is a caption</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="item comp-item">
+					<div class="row">
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="item comp-item">
+					<div class="row">
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+						<div class="col-md-2 col-xs-6 item-carousel">
+							<div class="comp-inner">This is a caption</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Controls -->
+	<a class="left carousel-control comp-control" href="#carousel-example-generic" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	<a class="right carousel-control comp-control" href="#carousel-example-generic" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</div>
+<script type="text/javascript">
+	$('.comp-inner').on('click', function(e) {
+		$('.comp-inner').removeClass('comp-inner-selected');
+		$(e.currentTarget).toggleClass('comp-inner-selected');
+	});
+</script>

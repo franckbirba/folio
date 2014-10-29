@@ -1,0 +1,60 @@
+<h3 class="build-title">Création d'un bâtiment (étape {{step}}): informations générales</h3>
+<form role="form" class="form-horizontal" name="form" ng-submit="" novalidate style="position:relative">
+	<div class="build-invest">
+		<h3>Investissement</h3>
+		<div class="form-group">
+			<label for="portfolio" class="col-sm-2 control-label">Portfolio</label>
+			<div class="col-sm-10">
+				 <input class="form-control"
+				 	type="text"
+				 	placeholder="{{portfolio_id}}"
+				 	name="portfolio"
+				 	ng-model="model.portofolio"
+				 	novalidate >
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="portfolio" class="col-sm-2 control-label">Nom du Bâtiment</label>
+			<div class="col-sm-10">
+				<input class="form-control"
+					type="text"
+					placeholder="Nom du Bâtiment"
+					name="name"
+					ng-model="model.name"
+					autofocus
+					novalidate>
+			</div>
+		</div>
+	</div><hr>
+	<div>
+		<div class="building-form">
+			<h3>Adresse</h3>
+			<div class="form-group" ng-repeat="(key, values) in model.address">
+				<label for="portfolio" class="col-sm-2 control-label">{{key | buildingAdress}}</label>
+				<div class="col-sm-10">
+					<input class="form-control"
+						type="text"
+						placeholder="{{key | buildingAdress}}"
+						name="{{key}}"
+						ng-model="model.address[key]"
+						autofocus
+						novalidate >
+				</div>
+			</div>
+			<!-- GOOGLE MAP -->
+			<h3>Map</h3>
+			<google-map center="map.center" zoom="map.zoom"></google-map>
+		</div>
+	</div>
+
+
+	<!-- PHOTOS -->
+	<h3>Photos</h3>
+	<div>
+		<div class="building-img" ng-repeat="img in images track by $index">
+			<img src="{{img.src}}">
+			<button href="" class="btn btn-xs btn-danger glyphicon glyphicon-remove building-btn-del" ng-click="delImage($index)"></button>
+		</div>
+		<button class="btn btn-primary glyphicon glyphicon-plus"></button>
+	</div>
+</form>

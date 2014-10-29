@@ -1,0 +1,50 @@
+//OPTIONS
+rental_status:
+  - (empty): (vide)
+  - vacant: vacant
+  - rented: loué
+  - multi-tenants: multilocataires
+usage:
+  - (empty): (vide)
+  - office: bureau
+  - commercial: commerce
+  - residential: residentiel
+igh:
+  - true: vrai
+  - false: faux
+erp_status:
+  - cdp: cdp
+  - erp cat 2: erp catégorie 2
+  - erp cat 3: erp catégorie 3
+  - erp cat 5: erp catégorie 5
+grades:
+  - (empty): (vide)
+  - A: A
+  - B: B
+  - C: C
+  - D: D
+  - E: E
+  - F: F
+  - G: G
+quality:
+  - (empty): (vide)
+  - good: bon
+  - average: moyen
+  - bad: mauvais
+technical_info:
+  - (empty): (vide)
+  - new or good condition (DVR > 10): neuf ou bon état (DVR > 10)
+  - average condition (5 > DVR < 10): état moyen (5 > DVR > 10)
+  - bad condition (DVR < 5): mauvais état (DVR < 5)
+conformity:
+  - (empty): (vide)
+  - conforme: conforme
+  - minor non conformity: non conformité mineure
+  - major non conformity: non conformité majeure
+length:
+  - (empty): (vide)
+  - month: mensuel
+  - trimester: trimestriel
+  - semester: semestriel
+  - year: annuel
+  - biannual: biannuel

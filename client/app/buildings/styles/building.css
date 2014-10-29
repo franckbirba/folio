@@ -1,0 +1,44 @@
+.building-container{
+  padding: 10px;
+  border: 1px solid #eeeeee;
+  background: #eeeeee;
+}
+
+.building-form{
+  height:300px;
+  width:400px;
+  float:left;
+}
+
+.building-img{
+  position:relative;
+  width:200px;
+  height:150px;
+  float:left;
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.building-img > img {
+  height: 150px;
+  width: 200px;
+  border-color:black;
+  border-width:thin;
+  border-style:solid;
+}
+
+.building-btn-del {
+  position:absolute;
+  right:5px;
+  top: 5px;
+}
+
+.building-btn-next{
+  position:absolute;
+  right:50px;
+}
+
+.building-btn-prev{
+  position:absolute;
+  left:50px;
+}

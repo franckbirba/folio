@@ -1,0 +1,43 @@
+<h3 class="build-title">Création d'un bâtiment (étape {{step}}): informations générales</h3>
+<!-- FIRST CONTAINER -->
+<div class="container-fluid building-container">
+	<form role="form" class="form-horizontal" name="form" ng-submit="" novalidate>
+	<div class="build-info">
+		<h3>Informations complémentaires</h3>
+		<pre>{{model.info}}</pre>
+		<div class="form-group" ng-repeat="(key, values) in model.info">
+			<label for="portfolio" class="col-sm-2 control-label">{{key | buildingInfo }}
+			</label>
+			<div class="col-sm-10">
+				<input class="form-control"
+					type="text"
+					placeholder="{{key | buildingInfo}}"
+					name="{{key}}"
+					ng-model="model.info[key]"
+					autofocus>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- SECOND CONTAINER -->
+<div class="container-fuild">
+	<div class="usages">
+		<h3>Usages</h3>
+		<label>Le bâtiment</label>
+		<div class="build-radio">
+			<div class="radio">
+				<label>
+					<input type="radio" name="buildinguse" value="single" checked>
+					Dispose d'un seul usage
+				</label>
+			</div>
+
+			<div class="radio">
+				<label>
+					<input type="radio" name="buildinguse" value="multi">
+					Dispose de plusieurs usages
+				</label>
+			</div>
+		</div>
+	</div>
+</div>
