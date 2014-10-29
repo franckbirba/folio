@@ -1,62 +1,71 @@
-'use strict'
+(function(){
+  'use strict';
 
-var SceModule = angular.module('scenarioMdl', ['buildingMdl']);
+  angular.module('scenarioMdl', [
+    'ui.router',
+    'ngResource',
+    'buildingMdl'
+  ]);
 
-SceModule
-  .config(['$routeProvider', function($routeProvider){
+  function ScenarioCfg($stateProvider, $locationProvider){
     var auth = false;
     var path = 'scripts/scenarios/views/';
-    $routeProvider
-      .when('/new-ref-action', {
+    $stateProvider
+      .state('/new-ref-action', {
         templateUrl: path + 'NewReferenceAction.view.html',
         controller: 'NewReferenceActionController',
         authenticate: auth
       })
-      .when('/ref-actions', {
+      .state('/ref-actions', {
         templateUrl: path + 'ReferenceActionManager.view.html',
         controller: 'ReferenceActionManagerController',
         authenticate: auth
       })
-      .when('/new-action', {
+      .state('/new-action', {
         templateUrl: path + 'ApplyActions.view.html',
         controller: 'ApplyActionsController',
         authenticate: auth
       })
-      .when('/actions', {
+      .state('/actions', {
         templateUrl: path + 'ActionManager.view.html',
         controller: 'ActionManagerController',
         authenticate: auth
       })
-      .when('/scenarios', {
+      .state('/scenarios', {
         templateUrl: path + 'scenarios.tpl.html',
         controller: 'ScenarioCtrl',
         authenticate: auth
       })
-      .when('/scenario/:id', {
+      .state('/scenario/:id', {
         templateUrl: path + 'scenario.tpl.html',
         controller: 'ScenarioCtrl',
         authenticate: auth
       })
-      .when('/scenario', {
+      .state('/scenario', {
         templateUrl: path + 'scenarioForm.html',
         controller: 'ScenarioCtrl',
         authenticate: auth
       })
-      .when('/actions-old', {
+      .state('/actions-old', {
         templateUrl: path + 'actions.tpl.html',
         controller: 'ActionCtrl',
         authenticate: auth
       })
-      .when('/apply', {
+      .state('/apply', {
         templateUrl: path + 'actionApply.html',
         controller: 'ActionCtrl',
         authenticate: auth
       })
-      .when('/results', {
+      .state('/results', {
         templateUrl: path + 'actionResults.html',
         controller: 'ActionCtrl',
         authenticate: auth
       })
+  };
 
-  }]);
+  ScenarioCfg.$inject = ['$stateProvider', '$locationProvider'];
 
+  angular.module('scenarioMdl')
+    .config(ScenarioCfg);
+
+})();

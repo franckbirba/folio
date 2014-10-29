@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("eportfolioConfig", [])
+angular.module("eportfolioConfig")
 .constant("SETTINGS_CONF", {
   indices:{
     title:'Indices',

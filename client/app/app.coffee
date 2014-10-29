@@ -4,12 +4,15 @@ angular.module 'eportfolioApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngStorage',
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
   'pascalprecht.translate',
   'rssServices',
   'restangular',      # called with RestangularProvider
+  'google-maps'.ns(), # resolves to uiGmapgoogle-maps
+  'geocoder',
   'buildingMdl',
   'portfolioMdl',
   'observatoryMdl',

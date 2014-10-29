@@ -4,13 +4,14 @@
   function Config($stateProvider, PortfolioSvc){
     // change to true to turn on authentification
     var auth = false;
-    var path = 'observatory/views/';
+    var path = 'app/observatory/views/';
     $stateProvider
-      .state('/observatory', {
+      .state('observatory', {
+        url: '/observatory',
         templateUrl: path + 'observatory.tpl.html',
         controller: 'ObservatoryCtrl',
-        authenticate: auth,
-        resolve: PortfolioSvc
+        // authenticate: auth,
+        // resolve: PortfolioSvc
       });
   };
 

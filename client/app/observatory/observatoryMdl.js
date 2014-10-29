@@ -4,7 +4,8 @@
   angular.module('observatoryMdl', [
     'ui.router',
     'restangular',
-    'portfolioMdl'
+    'portfolioMdl',
+    'eportfolioConfig'
   ]);
 
 

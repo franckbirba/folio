@@ -27,42 +27,49 @@
   function BuildingCfg($stateProvider, $locationProvider){
     // change to true to turn on authentification
     var auth = false;
-    var path = 'scripts/buildings/views/';
+    var path = 'app/buildings/views/';
     var partials  = 'views/partials/';
     $stateProvider
       // Index all users buildings
-      .state('/buildings', {
+      .state('buildings', {
+        url: '/buildings',
         templateUrl: path + 'buildings.tpl.html',
         controller: 'BuildingCtrl',
         resolve: Resolve,
         authenticate: auth })
       // Show single building
       .state('/buildings/:id', {
+        url: '/buildings/:id',
         templateUrl: path + 'buildingDetail.html',
         controller: 'BuildingCtrl',
         resolve: Resolve,
         authenticate: auth })
       // Index all portfolio buildings
       .state('/portfolios/:id/buildings', {
+        url: '/portfolios/:id/buildings',
         templateUrl: path + 'buildings.tpl.html',
         controller: 'BuildingCtrl',
         resolve: Resolve,
         authenticate: auth })
       // Create new building belonging to port
       .state('/portfolios/:id/building', {
+        url: '/portfolios/:id/building',
         templateUrl: path + 'buildForm.tpl.html',
         controller: 'BuildingCtrl',
         resolve: Resolve,
         authenticate: auth })
       .state('/graph', {
+        url: '/graph',
         templateUrl: partials + 'graph.html',
         controller: 'BuildingCtrl',
         authenticate: auth })
       .state('/actionForm', {
+        url: '/actionForm',
         templateUrl: partials + 'actionForm.html',
         controller: 'BuildingCtrl',
         authenticate: auth })
       .state('/schemaHome', {
+        url: '/schemaHome',
         templateUrl: partials + 'schemaHome.html',
         controller: 'BuildingCtrl',
         authenticate: auth  });

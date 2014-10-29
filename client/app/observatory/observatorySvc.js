@@ -9,7 +9,7 @@
 (function(){
 'use strict';
 
-  function ObservatorySvc($q, Restangular, DUMMY){
+  function ObservatorySvc(Restangular, DUMMY){
     var self = this;
 
     // Static values
@@ -21,7 +21,7 @@
     };
   }
 
-  ObservatorySvc.$inject = ['$q', 'Restangular', 'DUMMY'];
+  ObservatorySvc.$inject = ['Restangular', 'DUMMY'];
 
   angular.module('observatoryMdl')
     .service('ObservatorySvc', ObservatorySvc);

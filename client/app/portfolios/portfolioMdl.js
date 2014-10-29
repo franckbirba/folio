@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('portfolioMdl', [
-    '$stateProvider',
+    'ui.router',
+    'ngResource',
     'restangular'
   ]);
 
