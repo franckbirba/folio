@@ -1,4 +1,5 @@
-# Tornado
+Folio
+=====
 
 A complete planification environnement for property management
 
@@ -48,3 +49,6 @@ _(Nothing yet)_
 ## License
 Copyright (c) 2014 Fulanke
 Licensed under the MIT license.
+=======
+
+
