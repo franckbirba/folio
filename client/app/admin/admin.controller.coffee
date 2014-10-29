@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .controller 'AdminCtrl', ($scope, $http, Auth, User) ->
 
   $http.get '/api/users'

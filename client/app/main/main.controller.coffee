@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .controller 'MainCtrl', ($scope, $http, socket) ->
   $scope.awesomeThings = []
 

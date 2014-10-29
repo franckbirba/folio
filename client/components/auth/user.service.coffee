@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .factory 'User', ($resource) ->
   $resource '/api/users/:id/:controller',
     id: '@_id'

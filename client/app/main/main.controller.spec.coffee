@@ -3,7 +3,7 @@
 describe 'Controller: MainCtrl', ->
 
   # load the controller's module
-  beforeEach module 'meanLeeApp' 
+  beforeEach module 'eportfolioApp' 
   beforeEach module 'socketMock' 
 
   MainCtrl = undefined

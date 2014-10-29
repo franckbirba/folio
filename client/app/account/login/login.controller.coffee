@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .controller 'LoginCtrl', ($scope, Auth, $location, $window) ->
   $scope.user = {}
   $scope.errors = {}

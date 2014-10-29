@@ -3,7 +3,7 @@
 ###
 Removes server error when user updates input
 ###
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .directive 'mongooseError', ->
   restrict: 'A'
   require: 'ngModel'

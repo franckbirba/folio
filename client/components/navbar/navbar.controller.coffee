@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .controller 'NavbarCtrl', ($scope, $location, Auth) ->
   $scope.menu = [
     title: 'Home'

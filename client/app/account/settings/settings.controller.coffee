@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'meanLeeApp'
+angular.module 'eportfolioApp'
 .controller 'SettingsCtrl', ($scope, User, Auth) ->
   $scope.errors = {}
   $scope.changePassword = (form) ->
