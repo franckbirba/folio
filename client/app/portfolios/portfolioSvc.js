@@ -4,7 +4,6 @@
   function PortfolioSvc(Restangular) {
     var resource = 'portfolios';
     var Portfolio = Restangular.service(resource);
-    
     return Portfolio
   };
 
