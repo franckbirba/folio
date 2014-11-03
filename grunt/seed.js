@@ -74,17 +74,18 @@ function createUser() {
     email: Faker.internet.email(),
     password: 'test'
   };
-  return(tmpUser);
+  return new User(tmpUser);
 }
 
-function createPortfolios(qty){
+function createPortfolios(qty, user){
   var portfolios = [];
   var newPortfolio = function(){
     return new Portfolio({
       name:     Faker.company.companyName(),
       info:     Faker.company.catchPhrase(),
       summary:  Faker.company.catchPhraseDescriptor(),
-      image:    Faker.image.imageUrl()
+      image:    Faker.image.imageUrl(),
+      user_id: user
     });
   };
   for(var i = 0; i < qty; i++){
@@ -93,11 +94,13 @@ function createPortfolios(qty){
   return portfolios;
 }
 
-function createBuildings(qty){
+function createBuildings(qty, user, portfolio){
   var buildings = [];
   var newBuilding = function(){
     return new Building({
       name:    Faker.name.firstName(),
+      user_id: user,
+      portfolio: portfolio,
       address:  new Address(),
       info: {
         construction_year: Faker.random.number(),
@@ -123,10 +126,12 @@ function createBuildings(qty){
   return buildings;
 }
 
-function createLeases(qty){
+function createLeases(qty, user, building){
   var leases = [];
   var newLease = function(){
     return new Lease({
+      user_id: user,
+      building_id: building,
       area_usefull:       Faker.random.number(),
       floor:              Faker.random.number(),
       name:               Faker.name.lastName()
@@ -161,6 +166,21 @@ function seedDatabase(){
   // or async call
 }
 
+
+function seed(){
+  var user = createUser();
+  user.save();
+  var portfolios = createPortfolios(Faker.random.number(10), user._id);
+  var buildings = [];
+  for(folio in portfolios) {
+    var tmpBuildings = createBuildings(Faker.random.number(10), user._id, portfolios[folio]);
+    for(buildingIndex in tmpBuildings) {
+      var tmpLeases = createLeases(Faker.random.number(10), user._id, tmpBuildings[buildingIndex]);
+    }
+    buildings.push(tmpBuildings);
+  }
+ console.log(user,portfolios,buildings);
+}
 /*
 ** Create default Models
 */
@@ -177,7 +197,7 @@ function defaultModels(){
   console.log('finished populating schemas');
 }
 
-
+seed();
 /*
 ** Run Seed scripts
 */
