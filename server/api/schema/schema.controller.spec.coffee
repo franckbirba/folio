@@ -9,11 +9,11 @@ Lease =     require '../lease/lease.model'
 Portfolio = require '../portfolio/portfolio.model'
 models = [Building, Lease, Portfolio]
 
-describe.only 'GET /api/schemas', ->
+describe 'GET /api/schemas', ->
   Model = models[Math.floor(Math.random() * 3)]
   path = '/api/schemas/' + Model.modelName.toLowerCase()
 
-  
+
   before ->
     Model.create {name: 'Model'}, ->
 
