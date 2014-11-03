@@ -5,6 +5,13 @@ var Building = require(__dirname+'/../server/api/building/building.model');
 var User = require(__dirname+'/../server/api/user/user.model');
 var Faker = require('faker');
 
+var modelMap = {
+  lease: Lease,
+  portfolio: Portfolio,
+  building: Building,
+  user: User
+};
+
 // 1) generates a user
 // 2) creates an account
 // 3) creates a portfolio
@@ -40,12 +47,35 @@ module.exports = function(grunt){
       ]);
     }
     else {
-      seedDatabase();
+      seed();
       /*grunt.task.run([
           'db-seed'
         ]);*/
     }
   });
+
+  grunt.registerTask('add-users', function(){
+    createUsers(grunt.option('quantity'));
+  });  
+
+  grunt.registerTask('add-buildings', function(){
+    createBuildings(grunt.option('quantity'), grunt.option('user'), grunt.option('portfolio'));
+  });
+
+  grunt.registerTask('add-portfolios', function(){
+    createPortfolios(grunt.option('quantity'), grunt.option('user'))
+  });
+
+  grunt.registerTask('add-leases', function(){
+    createLeases(grunt.option('quantity'), grunt.option('user'), grunt.option('building'))
+  });
+
+  grunt.registerTask('getInfo', function(){
+    modelMap[grunt.option('model')].find({_id: grunt.option('_id')}, function(row){
+      console.log("here");
+      console.log(row);
+    })
+  })
 }
 
 
@@ -67,14 +97,22 @@ function Address(){
   return address;
 }
 
-function createUser() {
-  var tmpUser = {
-    provider: 'local',
-    name: Faker.name.findName(),
-    email: Faker.internet.email(),
-    password: 'test'
+function createUsers(qty) {
+  var users = [];
+  if(!qty)
+    qty = 1;
+  var newUser = function(){
+    return User({
+      provider: 'local',
+      name: Faker.name.findName(),
+      email: Faker.internet.email(),
+      password: 'test'
+    })
   };
-  return new User(tmpUser);
+  for(var i=0; i<qty; i++){
+    users.push(newUser());
+  }
+  return users;
 }
 
 function createPortfolios(qty, user){
@@ -160,7 +198,7 @@ function seedDatabase(){
     });
     portfolio.save();
   });
-  console.log('finished populatind portfolios, buildings and leases');
+  console.log('finished populating portfolios, buildings and leases');
   // still need to disconnect after save finised.
   // either with single call back of Model.collection.insert(docs, callback())
   // or async call
@@ -168,18 +206,26 @@ function seedDatabase(){
 
 
 function seed(){
-  var user = createUser();
+  var user = createUsers()[0];
+  console.log("==> NEW USER <==");
   user.save();
+  console.log(user, "===================");
   var portfolios = createPortfolios(Faker.random.number(10), user._id);
-  var buildings = [];
-  for(folio in portfolios) {
-    var tmpBuildings = createBuildings(Faker.random.number(10), user._id, portfolios[folio]);
-    for(buildingIndex in tmpBuildings) {
-      var tmpLeases = createLeases(Faker.random.number(10), user._id, tmpBuildings[buildingIndex]);
-    }
-    buildings.push(tmpBuildings);
-  }
- console.log(user,portfolios,buildings);
+  portfolios.forEach(function(portfolio){
+    console.log("==> NEW PORTFOLIO <==",portfolio);
+    var tmpBuildings = createBuildings(Faker.random.number(10), user._id, portfolio);
+    tmpBuildings.forEach(function(building){
+      console.log("==> NEW BUILDING <==",building);
+      var tmpLeases = createLeases(Faker.random.number(10), user._id, building);
+      tmpLeases.forEach(function(lease){
+        console.log("==> NEW LEASE <==",lease);
+        lease.save();
+      });
+      building.save();
+    });
+    portfolio.save();
+    console.log("===================");
+  });
 }
 /*
 ** Create default Models
@@ -197,7 +243,6 @@ function defaultModels(){
   console.log('finished populating schemas');
 }
 
-seed();
 /*
 ** Run Seed scripts
 */
