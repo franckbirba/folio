@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  function ObservatoryCtrl($scope, $timeout, Restangular, GoogleMapApi, Geocoder, ObservatorySvc, PortfolioSvc ){
+  function ObservatoryCtrl($scope, $timeout, Restangular, GoogleMapApi, Geocoder, ObservatorySvc, PortfolioSvc, index ){
     $scope.geocoder = Geocoder;
 
     $scope.values = ObservatorySvc.values;
@@ -9,7 +9,8 @@
     $scope.currentHqeType = $scope.values.hqeTypes.all;
 
     // To handle Portfolios. Could move to PortfolioCtrl?
-    $scope.portfolios = PortfolioSvc.getList().$object;
+    $scope.portfolios = index;
+    console.log($scope.portfolios);
     $scope.portfolioCreate = function(params){
       PortfolioSvc.post(params).then(function(res){
         $scope.portfolios.push(res);
@@ -212,7 +213,7 @@
     }
   };
 
-  ObservatoryCtrl.$inject = ['$scope', '$timeout', 'Restangular', 'GoogleMapApi'.ns(), 'Geocoder', 'ObservatorySvc', 'PortfolioSvc'];
+  ObservatoryCtrl.$inject = ['$scope', '$timeout', 'Restangular', 'GoogleMapApi'.ns(), 'Geocoder', 'ObservatorySvc', 'PortfolioSvc', 'index'];
 
   angular.module('observatoryMdl')
     .controller('ObservatoryCtrl', ObservatoryCtrl);

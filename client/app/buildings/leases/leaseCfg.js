@@ -3,7 +3,7 @@
 
   var Resolve = {
     'model': ['Restangular', function(Restangular){
-      return Restangular.one('models').get({name: 'Model', collection: 'lease'});
+      return Restangular.one('schemas').get({name: 'Model', collection: 'lease'});
     }],
     'index':['Restangular', '$route', 'LeaseSvc', function(Restangular, $route, LeaseSvc){
       if (_.has($route.current.params, 'id')){

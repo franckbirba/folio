@@ -10,7 +10,7 @@
 
   function portFormDir(){
     return {
-      templateUrl: '/scripts/portfolios/portForm.tpl.html',
+      templateUrl: '/app/portfolios/portForm.tpl.html',
       restrict: 'E',
       link: function () {}
     };

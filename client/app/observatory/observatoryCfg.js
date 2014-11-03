@@ -1,6 +1,12 @@
 (function(){
   'use strict';
 
+  var Resolve = {
+    'index': ['PortfolioSvc', function(PortfolioSvc){
+      return PortfolioSvc.getList().$object
+    }]
+  }
+
   function Config($stateProvider, PortfolioSvc){
     // change to true to turn on authentification
     var auth = false;
@@ -10,8 +16,8 @@
         url: '/observatory',
         templateUrl: path + 'observatory.tpl.html',
         controller: 'ObservatoryCtrl',
-        // authenticate: auth,
-        // resolve: PortfolioSvc
+        authenticate: auth,
+        resolve: Resolve
       });
   };
 

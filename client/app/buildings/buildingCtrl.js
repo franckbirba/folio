@@ -4,13 +4,13 @@
   function BuildingCtrl(
     $scope,
     $location,
-    $routeParams,
+    $stateParams,
     BuildingSvc,
     model,
     index,
     show) {
 
-    var id = $routeParams.id || null;
+    var id = $stateParams.id || null;
     $scope.portfolio_id = id;
 
     /*
@@ -73,7 +73,7 @@
   BuildingCtrl.$inject = [
     '$scope',
     '$location',
-    '$routeParams',
+    '$stateParams',
     'BuildingSvc',
     'model',
     'index',

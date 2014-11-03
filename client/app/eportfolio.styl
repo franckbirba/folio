@@ -1,0 +1,736 @@
+// Global
+$icon-font-path = "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/"
+$border-radius-base = 0px
+$brand-primary = #8faa00
+$text-color = #7c7c7c
+$font-family-sans-serif = "Open Sans", sans-serif
+$body-bg = #eaeaea !important
+// Dropdwon
+$dropdown-link-hover-bg = #8faa00
+$dropdown-link-hover-color = white
+// Button
+$primary-bg = #8faa00
+$btn-primary-border = #e4e4e4
+// Form
+$input-border-focus = #8faa00
+// Navbar
+$navbar-default-bg = #393939
+$navbar-height = 43px
+$navbar-default-border = #333333
+// Panel
+$panel-primary-border = #efefef
+$panel-default-text = white
+$panel-default-border = #dddddd
+$brand-success = #8faa00
+$component-active-color = red !important
+//** Global background color for active items (e.g., navs or dropdowns).
+.browsehappy
+  margin: 0.2em 0
+  background: #ccc
+  color: #000
+  padding: 0.2em 0
+/* Space out content a bit */
+body
+  overflow: hidden
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0
+  top: 0
+  font-family: 'Roboto Slab', sans-serif
+  background-color: #F1F2F1
+  color: #000 !important
+.wrapper
+  overflow: hidden
+  overflow-y: scroll
+  -webkit-overflow-scrolling: touch
+  float: left
+  width: 100%
+  height: 500px
+  top: 50px
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 10px 0 10px 0
+  margin-top: 70px
+.wrapper-timeline
+  background: white
+.wrapper_titre_timeline
+  background-color: #8FAA00
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer
+  padding-left: 15px
+  padding-right: 15px
+/* Custom page header */
+.header
+  border-bottom: 1px solid #e5e5e5
+/* Make the masthead heading the same height as the navigation */
+.header h3
+  margin-top: 0
+  margin-bottom: 0
+  line-height: 40px
+  padding-bottom: 19px
+/* Custom page footer */
+.footer
+  padding-top: 19px
+  color: #777
+  border-top: 1px solid #e5e5e5
+.container-narrow > hr
+  margin: 30px 0
+/* Main marketing message and sign up button */
+.jumbotron
+  text-align: center
+  border-bottom: 1px solid #e5e5e5
+.jumbotron .btn
+  font-size: 21px
+  padding: 14px 24px
+/* Supporting marketing content */
+.marketing
+  margin: 40px 0
+.marketing p + h4
+  margin-top: 28px
+// /* Responsive: Portrait tablets and up
+// @media screen and (min-width: 768px) {
+//     .container {
+//         max-width: 730px;
+//     }
+//     /* Remove the padding we set earlier
+//     .header,
+//     .marketing,
+//     .footer {
+//         padding-left: 0;
+//         padding-right: 0;
+//     }
+//     /* Space out the masthead
+//     .header {
+//         margin-bottom: 30px;
+//     }
+//     /* Remove the bottom border on the jumbotron for visual effect
+//     .jumbotron {
+//         border-bottom: 0;
+//     }
+// }
+a
+  color: $brand-primary
+  text-decoration: none
+form
+  padding: 20px 20px 55px 20px
+  width: 500px
+  margin: auto
+  background-color: rgb(206, 206, 206) !important
+.form-control
+  font-family: 'Roboto', sans-serif
+  font-size: 14px
+  color: #8faa00
+  border: 1px solid #f1f1f1 !important
+.form-control:focus
+  outline: 0
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(144, 189, 89, 0.6)
+.b-login-from
+  width: 100%
+  background-color: rgba(0, 0, 0, 0) !important
+button
+  outline: 0 !important
+textarea
+  outline: 1px solid $brand-primary
+​
+ input[text]
+  outline: 0 !important
+hr
+  border-top: 2px solid #eeeeee
+h1, h2, h3, h4, h5, h6
+  font-family: 'Open Sans', sans-serif
+  margin: 0 0 5px
+  font-weight: 400
+  color: #4d4d4d
+.popover, .popover-title
+  font-weight: 600
+  padding: 0 10px
+  height: 29px
+  line-height: 29px
+  background-image: none !important
+  filter: none !important
+  -webkit-border-radius: 0 0 0 0
+  -moz-border-radius: 0 0 0 0
+  border-radius: 0 0 0 0
+  background: #f4f4f4
+  border-bottom: 1px solid #efefef
+  position: relative
+  overflow: hidden
+  text-overflow: ellipsis
+[draggable=true]
+  cursor: move
+.build-info > fieldset
+  border: 1px solid #eeeeee
+  padding: 25px 25px 5px 25px
+  position: relative
+.label-fieldset
+  position: absolute
+  top: -10px
+  background-color: #8faa00
+  padding-left: 5px
+  padding-right: 5px
+.total-container
+  height: 50px
+.build-total
+  position: absolute
+  right: 13px
+td, th
+  text-align: center
+/*
+=================
+@Olivier Colonna
+- module
+=================
+ */
+.home
+  width: 100%
+  overflow: hidden
+  position: relative
+  transition: opacity 0.8s
+.sextan
+  background-image: url(../assets/images/sextan.png)
+  background-repeat: no-repeat
+  background-size: contain
+  height: 360px
+.text
+  display: none
+  font-family: 'Open Sans', sans-serif
+  font-size: 45px
+  position: relative
+  top: 200px
+  width: 100%
+  color: white
+a:hover
+  opacity: 0.5
+a:hover > .text
+  display: block
+.compass
+  background-image: url(../assets/images/compass.png)
+  background-repeat: no-repeat
+  background-size: contain
+  height: 360px
+.homegraph
+  width: 100%
+  border: 1px solid $panel-primary-border
+  background-image: url(../assets/images/evaluer-2.png)
+  background-repeat: no-repeat
+  background-size: contain
+  height: 360px
+.list-group-item
+  border: none
+  padding-top: 20px
+.btn-primary
+  border-radius: 0px
+  background-color: #8FAA00
+  color: #000
+  border: 0px none
+  padding: 5px 40px
+  float: right
+.panel-primary > .panel-heading
+  border: 0px
+.dropdown-toggle
+  display: block
+  color: #999
+  text-decoration: none
+  padding: 0 15px
+  font-weight: 600
+  -webkit-transition: color 0.5s
+  -o-transition: color 0.5s
+  -moz-transition: color 0.5s
+  transition: color 0.5s
+.nav > li > a:hover,
+.nav > li > a:focus
+  text-decoration: none
+  background: none
+  color: $brand-primary
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus
+  background: none
+  color: $brand-primary
+.panel-default > .panel-heading
+  background-color: $brand-primary
+.input-group-btn.open .btn-primary.dropdown-toggle, .btn-primary.disabled, .btn-primary[disabled], .btn-primary:hover, .btn-primary:focus
+  background: #f4f4f4
+  color: #fff
+  border-color: $brand-primary
+.login-panel
+  width: 300px
+  margin-left: 9%
+.panel-heading
+  border-top-right-radius: 0px
+  border-top-left-radius: 0px
+.form-absolute
+  position: absolute
+  right: 5px
+  width: 50px
+  height: 27px
+  border: none
+  padding: 0
+.form-group
+  background-color: #f1f2f1
+.title-edit
+  position: absolute
+  right: 10px
+  border: none !important
+.line
+  height: 31px
+.g-map
+  position: absolute
+  right: 50px
+  top: 242px
+  overflow: hidden
+/*
+** MOVED TO scripts/buildings/styles
+
+    .build-title {
+        background-color: white;
+        height: 50px;
+        color: #7c7c7c;
+        width: 112px;
+        margin: 10px;
+        padding: 12px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+
+    .build-title-schemaHome {
+        background-color: #8FAA00;
+        height: 50px;
+        color: #7c7c7c;
+        width: 216px;
+        margin: 10px;
+        padding: 12px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+
+    .build-invest > .col-sm-10 {
+        width: 500px;
+    }
+
+    .build-info {
+        width: 600px;
+        margin: auto;
+    }
+*/
+.form-horizontal .control-label
+  font-family: "Roboto" , sans-serif
+  font-size: 16px
+  font-style: italic
+  text-align: left
+  text-align: left
+  margin-bottom: 0
+  padding-top: 0px
+#timeline_form_typo
+  font-family: "Roboto", sans-serif
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group
+  height: 34px
+.usages
+  width: 600px
+  margin: auto
+  position: relative
+  height: 100px
+.build-radio
+  position: absolute
+  top: 30px
+  right: 5px
+.build-thumb
+  position: relative
+  width: 15%
+  height: 100%
+  float: left
+  margin-left: 5px
+  margin-right: 5px
+  padding: 5px
+  border: 1px solid #eeeeee
+.input-group-btn
+  width: 25%
+.build-lab
+  width: 200px
+.build-lab-obs
+  width: 350px
+.build-lab-inline
+  position: absolute
+  bottom: 30px
+.dropdown-toggle, .build-input
+  height: 27px
+.btn-paperclip
+  border: none
+  background: none
+.compass-right
+  position: absolute
+  right: 15px
+/* actionForm */
+#bouton_termine
+/* Fin actionForm */
+.barTemp
+  height: 150px
+  width: 50px
+  background: #ff3232
+  background: -moz-linear-gradient(top, #ff3232 0%, #fff830 35%, #fff830 61%, #0cff00 100%)
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff3232), color-stop(35%, #fff830), color-stop(61%, #fff830), color-stop(100%, #0cff00))
+  background: -webkit-linear-gradient(top, #ff3232 0%, #fff830 35%, #fff830 61%, #0cff00 100%)
+  background: -o-linear-gradient(top, #ff3232 0%, #fff830 35%, #fff830 61%, #0cff00 100%)
+  background: -ms-linear-gradient(top, #ff3232 0%, #fff830 35%, #fff830 61%, #0cff00 100%)
+  background: linear-gradient(to bottom, #ff3232 0%, #fff830 35%, #fff830 61%, #0cff00 100%)
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3232', endColorstr='#0cff00',GradientType=0 )")
+  position: absolute
+.badge
+  position: absolute
+  top: -10px
+  right: 0
+  background: none
+  color: black
+  padding: 4px
+  font-size: 9px
+.picto-timeline
+  font-size: 21px
+  color: $brand-primary
+  position: relative
+  margin: 0px 0px 0px 15px
+.trimLine
+  width: 100%
+  height: 25px
+  border-bottom: 1px solid #eeeeee
+  position: relative
+.trimName
+  position: absolute
+.year
+  height: 100px
+  border-top: 1px solid #eeeeee
+.smallYear
+  overflow: hidden
+  height: 25px
+.numberYear
+  position: absolute
+  opacity: 1
+  font-size: 24px
+  left: 75px
+  color: #8faa00
+.year-odd
+  background-color: #f7f7f7
+.actionArray
+  height: 500px
+  -webkit-transform: translateY(30px)
+  -ms-transform: translateY(30px)
+  -moz-transform: translateY(30px)
+  transform: translateY(30px)
+  background: white
+  width: 100%
+  position: absolute
+  -webkit-transition: 1s ease-in-out
+  -moz-transition: 1s ease-in-out
+  -o-transition: 1s ease-in-out
+  -ms-transition: 1s ease-in-out
+  transition: 1s ease-in-out
+.actionArrayAnimate
+  -webkit-transform: translate(0em, -485px)
+  -moz-transform: translate(0em, -485px)
+  -o-transform: translate(0em, -485px)
+  -ms-transform: translate(0em, -485px)
+  transform: translate(0em, -485px)
+.buttonArray
+  position: absolute
+  top: 5px
+  right: 5px
+  font-size: 20px
+.blocleft
+  height: 700px
+  border: 1px solid #efefef
+  overflow: hidden
+  padding: none
+.blocright
+  height: 550px
+  overflow-y: scroll
+  overflow-x: hidden
+  border: 1px solid #efefef
+  position: relative
+.fullscreenButton
+  position: absolute
+  right: 4px
+  font-size: 20px
+  top: 13px
+  color: white
+.buttonFiltre
+  position: absolute
+  top: 0px
+  left: 200px
+/* SIGN UP */
+.signup
+  font-family: "Roboto", sans-serif
+.widget-head
+  background-color: #D6D7D6
+  background-image: -moz-linear-gradient(top, #fdfdfd, #f4f4f4)
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fdfdfd), to(#f4f4f4))
+  background-image: -webkit-linear-gradient(top, #fdfdfd, #f4f4f4)
+  background-image: -o-linear-gradient(top, #fdfdfd, #f4f4f4)
+  background-image: linear-gradient(to bottom, #fdfdfd, #f4f4f4)
+  background-repeat: repeat-x
+  filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffdfdfd', endColorstr='#fff4f4f4', GradientType=0)")
+  border-bottom: 1px solid #efefef
+  text-shadow: 0 1px 0 0 1px 0 #fff
+  height: 35px
+  line-height: 35px
+  position: relative
+  padding: 0 15px 0 15px
+  overflow: hidden
+/*
+=================
+@Olivier
+Layout
+=================
+ */
+.form-horizontal
+  border: none
+  width: 100%
+  background-color: #e4e4e4
+.col-sm-12
+  margin-top: 20px
+.col-sm-12 > .container > .panel
+  width: 1130px
+.panel
+  background-color: rgba(0, 0, 0, 0) !important
+  border: none !important
+.item-carousel
+  height: 180px
+  padding: 10px
+.comp-item
+  padding: 5px
+.comp-control
+  background-image: none !important
+  top: 100px
+  color: #eeeeee
+.comp-inner
+  border: 1px solid #eeeeee
+  border-radius: 10px
+  height: 100%
+  padding: 10px
+.comp-inner:active
+  border: 1px solid $brand-primary
+.comp-inner-selected
+  border: 3px solid $brand-primary
+.comp-panel
+  height: 150px
+  position: absolute
+  width: 30%
+  background-color: #eeeeee
+.left
+  left: 20px
+.right
+  right: 20px
+.comp-img
+  position: relative
+  width: 100%
+  height: 50%
+/*
+    FORM ARBRES
+ */
+.formulo
+  position: absolute
+  height: 200px
+  width: 300px
+  border: 1px solid #eeeeee
+  border-top: 0px
+  border-right: 0px
+  right: 0px
+  background: #eeeeee
+/*
+    action-form
+ */
+.action-form
+  border: 1px solid #eeeeee
+  padding: 10px
+  margin-bottom: 10px
+  border-radius: 10px
+.buildingdetail
+  border: 1px solid #eeeeee
+.navbar-form
+  margin-top: 7.5px
+.apply
+  float: left
+  position: relative
+  height: 300px
+  overflow: hidden
+  width: 50%
+.scroll-y
+  overflow-y: scroll
+  height: 263px
+.guest
+  height: 80px
+.media-object
+  float: left
+  height: 100%
+  margin-right: 10px
+.user
+  color: $btn-primary-bg
+.message
+  overflow: hidden
+  text-overflow: ellipsis
+  width: 155px
+  white-space: nowrap
+  float: right
+.messageMail
+  overflow: hidden
+  text-overflow: ellipsis
+  width: 100%
+  white-space: nowrap
+  float: left
+.attachment
+  color: $btn-primary-bg
+  float: left
+.navbar-default
+  background-color: #f5f5f5
+  border-color: #f5f5f5
+  color: #f5f5f5
+.navbar-brand, .navbar-top-links li a
+  color: white !important
+/*
+=================
+@FBI
+GMAP
+=================
+*/
+body > div > div > div.btn-group.bootstrap-select.open > div > ul > li > a > span
+  font-family: 'Roboto Slab', sans-serif
+  font-size: 14px !important
+  position: initial !important
+  width: 100%
+.angular-google-map-container
+  height: 300px
+  width: 100%
+  margin-left: auto
+  margin-right: auto
+::-webkit-scrollbar
+  width: 0em !important
+/* sortable */
+[ng-drop].drag-enter
+  border: solid 2px red
+[ng-drag].drag-over
+  border: solid 1px red
+[ng-drag].dragging
+  opacity: 0.8
+[ng-drag]
+  -moz-user-select: -moz-none
+  -khtml-user-select: none
+  -webkit-user-select: none
+  -ms-user-select: none
+  user-select: none
+[ng-drag].timeline-action-tr
+  background: rgba(255, 0, 0, 0.5)
+  color: white
+  text-align: center
+  cursor: move
+[ng-drag].timeline-action-tr:hover
+  color: black
+/*
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+[ng-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+[ng-drag] {
+    background: rgba(255, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding-top: 40px;
+    display: block;
+    cursor: move;
+}
+
+[ng-drag].drag-over {
+    border: solid 1px red;
+}
+
+[ng-drag].dragging {
+    opacity: 0.5;
+}
+
+[ng-drop] {
+    background: rgba(0, 0, 0, 0.25);
+    text-align: center;
+    display: block;
+    position: relative;
+    padding: 20px;
+    width: 140px;
+    height: 140px;
+    float: left;
+}
+
+[ng-drop] span.title {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 20px;
+    margin-left: -100px;
+    margin-top: -10px;
+}
+
+[ng-drop] div {
+    position: relative;
+    z-index: 2;
+}
+
+.draglist {
+    display: inline-block;
+    margin: 0 auto;
+}*/
+#logo
+  width: 150px
+  height: 50px
+#logologin
+  width: 400px
+.compass-collapse-nav
+  max-height: 70px
+  padding: 9px
+.login
+  background-image: url(../assets/images/fondhome.jpg)
+  background-repeat: no-repeat
+  height: 800px
+input
+  font-style: italic
+  color: #000 !important
+.panel-default
+  height: 200px
+.col-md-8
+  padding-top: 2%
+.btn:hover .ng-binding
+  color: #303030
+  font-style: italic
+  top: 154px
+.col-md-4 a:hover
+  color: #303030 !important
+  font-style: italic
+.btn-primary:hover
+  color: #fff !important
+  background-color: #88a201 !important
+.checkbox input[type="checkbox"]
+  margin-left: 0
+.guest
+  height: 100px
+.list-group-item
+  padding: 10px
+.signup
+  padding: 10px 0 10px 20px
+  margin: 0
+@media screen and (max-width: 1200px)
+  .sextan, .compass, .homegraph
+    height: 218px
+  .col-md-4
+    width: 33%
+    float: left
+  .col-md-8
+    width: 66%
+    margin-top: 40px

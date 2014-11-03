@@ -29,6 +29,7 @@
     "socketio-jwt": "^2.0.2"
   },
   "devDependencies": {
+    "chai": "^1.9.2",
     "connect-livereload": "~0.4.0",
     "faker": "^2.0.1",
     "glob": "^4.0.6",

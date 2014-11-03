@@ -1,0 +1,59 @@
+ul
+  li#ptor-test
+      a(href='/login') login
+  li
+    a(href='/signup') signup
+  li
+    a(href='/home') home
+  li
+    a(href='/settings') settings
+  li
+    a(href='/actionList') liste d'actions
+  li
+    a(href='/scenarioList') liste de scénarios
+  li
+    a(href='/applyAction') Appliquer des actions
+  li
+    a(href='/newScenario') Nouveau scénario
+  li
+    a(href='/actionForm') Nouvelle action
+  li
+    a(href='/timeline') Timeline
+.container(ng-controller='HomeCtrl')
+  .row
+    .col-xs-12.col-md-8.home-content
+      .col-xs-6.col-md-4.home-banner.sextan
+        .home-legend
+          a.btn.btn-default(href='/observatory', role='button')
+            h2
+              | {{ 'OBSERVE' | translate }}
+              h2
+      .col-xs-6.col-md-4.pull-right.home-banner.compass
+        .home-legend
+          a.btn.btn-default(href='/schemaHome', role='button')
+            h2 {{ 'PLAN' | translate }}
+      .col-xs-12.col-md-8.home-banner.homegraph
+        .home-legend
+          a.btn.btn-default(href='/timeline', role='button')
+            h2 {{ 'EVALUATE' | translate }}
+
+      .col-xs-12.col-md-4.home-sidebar
+        .panel.panel-default
+          .panel-heading
+            span.glyphicon.glyphicon-info-sign
+            | {{ 'NEWS' | translate }}
+            span.glyphicon.glyphicon-envelope(style='float: right;')
+          .panel-body
+            .list-group(style='height: 100%; overflow-y: scroll;', ng-repeat='feed in feeds | orderBy:\'title\'', ng-animate='\'animate\'')
+              p
+                span(ng-repeat='item in feed.entries', ng-animate='\'animate\'')
+                  i
+                    | {{ 'FROM' | translate }}
+                    span.user {{item.author}}
+                    | {{ 'AT' | translate }}
+                    em {{getTimeStamp(item.publishedDate) | date:'H:mm dd-MM-yyyy'}}
+                  a.list-group-item.guest(href='{{item.link}}', target='_blank')
+                    span
+                      strong {{item.title}}
+                    br
+                    span.messageMail(ng-bind-html='item.contentSnippet')

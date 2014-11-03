@@ -3,5 +3,8 @@ module.exports = {
   options: {
     reporter: 'spec'
   },
-  src: ['server/**/*.spec.js']
+  src: [
+    'server/**/*.spec.js',
+    'server/**/*.spec.coffee'
+  ]
 }
