@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
  * Portfolio Schema
  */
 var PortfolioSchema = new Schema({
+  user_id:  { type: Schema.Types.ObjectId, ref: 'User'},
   name:       {type: String, default: ''},
   info:       {type: String, default: ''},
   desc:       {type: String, default: ''},
