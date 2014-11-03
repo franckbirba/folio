@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
 		Schema = mongoose.Schema;
 
 var LeaseSchema = new Schema ({
+  user_id:  { type: Schema.Types.ObjectId, ref: 'User'},
   area_usefull: { type: Number, default: 0 },
   building_id:  { type: Schema.Types.ObjectId, ref: 'Building'},
   certifications: [{
