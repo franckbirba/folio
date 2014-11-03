@@ -1,4 +1,11 @@
 // grunt test:
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var mongoose = require('mongoose');
+var config = require(__dirname+'/../server/config/environment');
+
+// Connect to database
+mongoose.connect(config.mongo.uri, config.mongo.options);
+
 var Lease = require(__dirname+'/../server/api/lease/lease.model');
 var Portfolio = require(__dirname+'/../server/api/portfolio/portfolio.model');
 var Building = require(__dirname+'/../server/api/building/building.model');
@@ -11,6 +18,7 @@ var modelMap = {
   building: Building,
   user: User
 };
+
 
 // 1) generates a user
 // 2) creates an account
@@ -54,6 +62,10 @@ module.exports = function(grunt){
     }
   });
 
+  grunt.registerTask('clean-seed', function(){
+    grunt.task.run('mongo_drop');
+  });
+
   grunt.registerTask('add-users', function(){
     createUsers(grunt.option('quantity'));
   });  
@@ -70,11 +82,19 @@ module.exports = function(grunt){
     createLeases(grunt.option('quantity'), grunt.option('user'), grunt.option('building'))
   });
 
+
   grunt.registerTask('getInfo', function(){
-    modelMap[grunt.option('model')].find({_id: grunt.option('_id')}, function(row){
-      console.log("here");
-      console.log(row);
-    })
+    var done = this.async();
+
+    /*if (grunt.option('model') === 'lease') {
+      Lease.find({_id:grunt.option('id')}, function(err, doc){
+        done();
+      });
+    }*/
+    modelMap[grunt.option('model')].findById(grunt.option('id'),function(err, doc){
+      console.log(arguments);
+      done();
+    });
   })
 }
 
@@ -206,26 +226,30 @@ function seedDatabase(){
 
 
 function seed(){
+
   var user = createUsers()[0];
   console.log("==> NEW USER <==");
   user.save();
   console.log(user, "===================");
   var portfolios = createPortfolios(Faker.random.number(10), user._id);
   portfolios.forEach(function(portfolio){
+        portfolio.save();
+
     console.log("==> NEW PORTFOLIO <==",portfolio);
     var tmpBuildings = createBuildings(Faker.random.number(10), user._id, portfolio);
     tmpBuildings.forEach(function(building){
+      building.save();
       console.log("==> NEW BUILDING <==",building);
       var tmpLeases = createLeases(Faker.random.number(10), user._id, building);
       tmpLeases.forEach(function(lease){
         console.log("==> NEW LEASE <==",lease);
         lease.save();
       });
-      building.save();
+      
     });
-    portfolio.save();
     console.log("===================");
   });
+
 }
 /*
 ** Create default Models
@@ -249,6 +273,8 @@ function defaultModels(){
 //seedDatabase();
 //defaultModels();
 
+
+/*
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
@@ -266,3 +292,4 @@ User.find({}).remove(function() {
     }
   );
 });
+*/
