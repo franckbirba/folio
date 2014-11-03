@@ -42,6 +42,6 @@ angular.module('eportfolioApp').directive('listedit', function ($rootScope, $int
           return ('fa-sort-asc');
       };
     },
-    templateUrl:'/scripts/settings/listedit.html'
+    templateUrl:'/app/settings/listedit.html'
   };
 });

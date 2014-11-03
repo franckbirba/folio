@@ -6,9 +6,9 @@
       var model = Restangular.one('models').get({name: 'Model', collection: 'building'});
       return model;
     }],
-    'index':['Restangular', '$route', 'BuildingSvc', function(Restangular, $route, BuildingSvc){
-      if (_.has($route.current.params, 'id')){
-        var portfolio_id = $route.current.params.id;
+    'index':['Restangular', '$stateParams', 'BuildingSvc', function(Restangular, $stateParams, BuildingSvc){
+      if (_.has($stateParams, 'id')){
+        var portfolio_id = $stateParams.id;
         return Restangular
           .one('portfolios', portfolio_id)
           .all('buildings')
@@ -19,7 +19,7 @@
       }
     }],
     'show': ['$route', 'BuildingSvc', function($route, BuildingSvc){
-      var one = BuildingSvc.one($route.current.params.id).get();
+      var one = BuildingSvc.one($stateParams.id).get();
       return one;
     }]
   }

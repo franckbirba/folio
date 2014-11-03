@@ -1,0 +1,18 @@
+<div style="width:50%;float:left">
+  <div ng-repeat="point in TIMELINE" class="year" ng-class-odd="'year-odd'" ng-class-even="'year-even'">
+    <div class="numberYear" >{{point.year}}</div>
+    <div class="trimLine" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)" ng-repeat="tmpTrim in point.t">
+      <div id="{{tmpTrim.name}}-{{tmpTrim.year}}2" trim></div>
+    </div>
+  </div>
+</div>
+
+<div style="width:50%;float:left">
+  <div ng-repeat="point in TIMELINE" class="year" ng-class-odd="'year-odd'" ng-class-even="'year-even'">
+    <div class="trimLine" ng-drop="true" ng-drop-success="onDropComplete($data, $event)" ng-repeat="tmpTrim in point.t">
+
+      <div ng-drag="true" ng-drag-data="tmpTrim" ng-class="tmpTrim.name" class="trimName">{{tmpTrim.name}}</div>
+      <div id="{{tmpTrim.name}}-{{tmpTrim.year}}" trim></div>
+    </div>
+  </div>
+</div>

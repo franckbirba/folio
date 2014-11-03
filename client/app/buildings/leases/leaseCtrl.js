@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  function LeaseCtrl($scope, $routeParams, index, options){
+  function LeaseCtrl($scope, $stateParams, index, options){
     $scope.leases = index;
     $scope.options = options.data;
 
@@ -14,7 +14,7 @@
     }
   }
 
-  LeaseCtrl.$inject = ['$scope', '$routeParams', 'index', 'options'];
+  LeaseCtrl.$inject = ['$scope', '$sateParams', 'index', 'options'];
 
   angular.module('buildingMdl')
     .controller('LeaseCtrl', LeaseCtrl);
