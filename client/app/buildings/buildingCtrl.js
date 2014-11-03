@@ -6,7 +6,7 @@
     $location,
     $stateParams,
     BuildingSvc,
-    model,
+    schema,
     index,
     show) {
 
@@ -18,7 +18,7 @@
     */
     $scope.buildings = index;
     $scope.building = show;
-    $scope.model = model;
+    $scope.model = schema;
 
     /*
     ** Crud interactions
@@ -75,7 +75,7 @@
     '$location',
     '$stateParams',
     'BuildingSvc',
-    'model',
+    'schema',
     'index',
     'show'
     ];

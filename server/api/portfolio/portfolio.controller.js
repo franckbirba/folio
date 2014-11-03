@@ -63,6 +63,14 @@ exports.destroy = function(req, res) {
   });
 };
 
+// Get emnbedded docs (buildings) of Portfolio
+exports.buildings = function(req, res){
+  Building.find({portfolio: mongoose.Types.ObjectId(req.params.id)}, function(err, buildings){
+    if (err) { console.log(err); next() };
+    res.send(buildings);
+  });
+}
+
 function handleError(res, err) {
   return res.send(500, err);
 }

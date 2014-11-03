@@ -13,8 +13,8 @@ angular.module 'eportfolioApp'
     templateUrl: 'app/account/signup/signup.html'
     controller: 'SignupCtrl'
 
-  .state 'settings',
-    url: '/settings'
+  .state 'user-settings',
+    url: '/user-settings'
     templateUrl: 'app/account/settings/settings.html'
     controller: 'SettingsCtrl'
     authenticate: true

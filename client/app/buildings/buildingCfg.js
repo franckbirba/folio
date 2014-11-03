@@ -2,9 +2,14 @@
 
 'use strict';
   var Resolve = {
-    'model': ['Restangular', function(Restangular){
-      var model = Restangular.one('models').get({name: 'Model', collection: 'building'});
-      return model;
+    // 'model': ['Restangular', function(Restangular){
+    //   var model = Restangular.one('models').get();
+    //   return model;
+    // }],
+    'schema': ['SchemaSvc', function(SchemaSvc){
+      var schema = SchemaSvc.one('building');
+      console.log(schema);
+      return schema
     }],
     'index':['Restangular', '$stateParams', 'BuildingSvc', function(Restangular, $stateParams, BuildingSvc){
       if (_.has($stateParams, 'id')){
@@ -65,7 +70,7 @@
         authenticate: auth })
       .state('/actionForm', {
         url: '/actionForm',
-        templateUrl: partials + 'actionForm.html',
+        templateUrl: 'app/scenarios/views/actionForm.html',
         controller: 'BuildingCtrl',
         authenticate: auth })
       .state('/schemaHome', {

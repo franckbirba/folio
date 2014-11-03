@@ -6,7 +6,8 @@
     'ui.router',
     'ngResource',
     'restangular',
-    'utilsMdl'
+    'utilsMdl',
+    'schemaMdl'
   ]);
 
 })();

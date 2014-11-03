@@ -63,3 +63,8 @@ dead
   views/partials/signup
   views/partials/timeline.orig
   views/partials/login   ?
+
+
+TUESADY:
+  portfolio.controller.spec
+    need to handle create of embedded object.

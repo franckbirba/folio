@@ -1,15 +1,4 @@
 
-angular.module('eportfolioApp')
-  .config(function($stateProvider){
-    var auth =  false;
-    var path = 'scripts/settings/';
-
-    $stateProvider
-      .state('/settings', {
-        templateUrl: path + 'settings.tpl.html',  controller: 'SettingsCtrl', authenticate: auth
-      });
-  });
-
 angular.module('eportfolioApp').controller('SettingsCtrl', function ($scope, Restangular, $modal) {
 
   $scope.errors = {};

@@ -9,7 +9,7 @@
 
   function ScenarioCfg($stateProvider, $locationProvider){
     var auth = false;
-    var path = 'scripts/scenarios/views/';
+    var path = 'app/scenarios/views/';
     $stateProvider
       .state('/new-ref-action', {
         templateUrl: path + 'NewReferenceAction.view.html',
@@ -26,17 +26,19 @@
         controller: 'ApplyActionsController',
         authenticate: auth
       })
-      .state('/actions', {
-        templateUrl: path + 'ActionManager.view.html',
+      .state('actions', {
+        url: '/actions',
+        templateUrl: 'app/scenarios/views/ActionManager.view.html',
         controller: 'ActionManagerController',
         authenticate: auth
       })
-      .state('/scenarios', {
-        templateUrl: path + 'scenarios.tpl.html',
+      .state('scenarios', {
+        url: '/scenarios',
+        templateUrl: 'app/scenarios/views/scenarios.tpl.html',
         controller: 'ScenarioCtrl',
         authenticate: auth
       })
-      .state('/scenario/:id', {
+      .state('/scenarios/:id', {
         templateUrl: path + 'scenario.tpl.html',
         controller: 'ScenarioCtrl',
         authenticate: auth
