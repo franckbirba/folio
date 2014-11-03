@@ -1,6 +1,10 @@
 'use strict';
 
 var mongoose = require('mongoose');
+require('../building/building.model')
+require('../lease/lease.model')
+require('../portfolio/portfolio.model')
+
 
 function capitalize(string){
   if (string)
@@ -8,20 +12,14 @@ function capitalize(string){
   return null;
 };
 
-exports.index = function(req, res){
-  var co = capitalize(req.query.collection);
-  console.log(req.query);
-  if (co)
-  {
+exports.show = function(req, res){
+  var co = capitalize(req.params.id);
+  if (co){
     var collection = mongoose.model(co);
-    collection.findOne({name: req.query.name}, function(err, elem){
+    collection.findOne({name: 'Model'}, function(err, elem){
       if(err) { return handleError(res, err); }
-      if(!elem) {
-        return res.send(404);
-      }
+      if(!elem) { return res.send(404); }
       return res.json(elem);
     });
-  } else {
-    return res.send(404);
-  }
+  } else { return res.send(404) }
 };
