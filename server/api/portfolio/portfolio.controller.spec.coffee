@@ -4,7 +4,7 @@ expect =  require('chai').expect
 app =     require '../../app'
 request = require 'supertest'
 faker =   require 'faker'
-Model =   require '../portfolio/portfolio.model'
+Model =   require './portfolio.model'
 
 class NestedSeed
   constructor: ()->
@@ -13,54 +13,51 @@ class NestedSeed
 class Seed
   constructor: ()->
     @name = faker.company.companyName()
-    @buildings = []
-    @buildings.push new NestedSeed
 
-seed = new Seed
-path = '/api/portfolios'
-id = ''
-console.log seed
-describe 'GET /api/portfolios/:id', ->
+describe 'Midway: Portfolios', ->
+  seed = new Seed
+  path = '/api/portfolios'
+  id = ''
 
-  before ->
-    Model.create seed, (err, res)->
-      id = res._id
+  describe 'GET /api/portfolios/:id', ->
 
-  after ->
-    Model.findOne({id: id}).remove (err, res)->
+    before ->
+      Model.create seed, (err, res)->
+        id = res._id
 
-  it 'responds with a JSON Object', (done) ->
-    request(app)
-      .get(path + '/' + id)
-      .expect('Content-Type', /json/)
-      .end (err, res)->
-        return done err if err
-        expect(res.body).to.be.an.instanceOf Object
-        done()
+    after ->
+      Model.findOne({id: id}).remove (err, res)->
 
-  it 'returns the requested document', (done)->
-    request(app)
-      .get(path + '/' + id)
-      .expect('Content-Type', /json/)
-      .end (err, res)->
-        return done err if err
-        expect(res.body.name).to.eql seed.name
-        done()
+    it 'responds with a JSON Object', (done) ->
+      request(app)
+        .get(path + '/' + id)
+        .expect('Content-Type', /json/)
+        .end (err, res)->
+          return done err if err
+          expect(res.body).to.be.an.instanceOf Object
+          done()
 
-describe.only 'GET /api/portfolios/:id/buildings', ->
-  before ->
-    Model.create seed, (err, res)->
-      console.log err, res
-      id = res._id
-  after ->
-    Model.findOne {id: id}.remove (err, res)->
+    it 'returns the requested document', (done)->
+      request(app)
+        .get(path + '/' + id)
+        .expect('Content-Type', /json/)
+        .end (err, res)->
+          return done err if err
+          expect(res.body.name).to.eql seed.name
+          done()
 
-  it 'returns the portfolio buildings', (done)->
-    path = "#{path}/#{id}/buildings"
-    request(app)
-      .get(path)
-      .expect('Content-Type', /json/)
-      .end (err, res)->
-        return done err if err
-        console.log res
-        expect(res.body.length).to.eql 1
+  # describe 'GET /api/portfolios/:id/buildings', ->
+  #   before ->
+  #     Model.create seed, (err, res)->
+  #       id = res._id
+  #   after ->
+  #     Model.findOne {id: id}.remove (err, res)->
+  #
+  #   it 'returns the portfolio buildings', (done)->
+  #     path = "#{path}/#{id}/buildings"
+  #     request(app)
+  #       .get(path)
+  #       .expect('Content-Type', /json/)
+  #       .end (err, res)->
+  #         return done err if err
+  #         expect(res.body.length).to.eql 1

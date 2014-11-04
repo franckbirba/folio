@@ -5,7 +5,6 @@
 
 'use strict';
 
-var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Portfolio = require('../api/portfolio/portfolio.model');
 var Building = require('../api/building/building.model');
@@ -109,7 +108,7 @@ function seedDatabase(){
     });
     portfolio.save();
   });
-  console.log('finished populatind portfolios, buildings and leases');
+  console.log('finished populating portfolios, buildings and leases');
   // still need to disconnect after save finised.
   // either with single call back of Model.collection.insert(docs, callback())
   // or async call

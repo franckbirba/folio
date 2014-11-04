@@ -3,13 +3,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var mongoose = require('mongoose');
 var config = require(__dirname+'/../server/config/environment');
 
-// Connect to database
+//Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
 var Lease = require(__dirname+'/../server/api/lease/lease.model');
 var Portfolio = require(__dirname+'/../server/api/portfolio/portfolio.model');
 var Building = require(__dirname+'/../server/api/building/building.model');
 var User = require(__dirname+'/../server/api/user/user.model');
+var Holding = require(__dirname+'/../server/api/holding/holding.model');
 var Faker = require('faker');
 
 var modelMap = {
@@ -68,7 +69,7 @@ module.exports = function(grunt){
 
   grunt.registerTask('add-users', function(){
     createUsers(grunt.option('quantity'));
-  });  
+  });
 
   grunt.registerTask('add-buildings', function(){
     createBuildings(grunt.option('quantity'), grunt.option('user'), grunt.option('portfolio'));
@@ -133,6 +134,12 @@ function createUsers(qty) {
     users.push(newUser());
   }
   return users;
+}
+
+function createHolding(){
+  return new Holding({
+    name: Faker.company.companyName()
+  })
 }
 
 function createPortfolios(qty, user){
@@ -230,22 +237,28 @@ function seed(){
   var user = createUsers()[0];
   console.log("==> NEW USER <==");
   user.save();
-  console.log(user, "===================");
+  console.log("===================");
+
+  var holding = createHolding()
+  holding.save();
+  console.log("==> NEW HOLDING <==");
+  console.log("\n===================");
+
   var portfolios = createPortfolios(Faker.random.number(10), user._id);
   portfolios.forEach(function(portfolio){
         portfolio.save();
 
-    console.log("==> NEW PORTFOLIO <==",portfolio);
+    console.log("==> NEW PORTFOLIO <==");
     var tmpBuildings = createBuildings(Faker.random.number(10), user._id, portfolio);
     tmpBuildings.forEach(function(building){
       building.save();
-      console.log("==> NEW BUILDING <==",building);
+      console.log("==> NEW BUILDING <==");
       var tmpLeases = createLeases(Faker.random.number(10), user._id, building);
       tmpLeases.forEach(function(lease){
-        console.log("==> NEW LEASE <==",lease);
+        console.log("==> NEW LEASE <==");
         lease.save();
       });
-      
+
     });
     console.log("===================");
   });
@@ -258,6 +271,7 @@ function defaultModels(){
   var portfolio = new Portfolio({ name: 'Model'});
   var building = new Building({ name: 'Model' });
   var lease = new Lease({name: 'Model'});
+  var holding = new Holding({name: 'Model'});
   lease.building = building._id;
   lease.save();
   building.portfolio = portfolio._id;

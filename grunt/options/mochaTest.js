@@ -5,6 +5,7 @@ module.exports = {
   },
   src: [
     'server/**/*.spec.js',
-    'server/**/*.spec.coffee'
+    'server/**/*.model.spec.coffee',
+    'server/**/*.controller.spec.coffee'
   ]
 }

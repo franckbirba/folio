@@ -1,11 +1,11 @@
 'use strict'
 
 angular.module 'eportfolioApp', [
+  'ngAnimate',
   'ngCookies',
-  'ngResource',
   'ngSanitize',
   'ngStorage',
-  'btford.socket-io',
+  'ngResource',
   'ui.router',
   'ui.bootstrap',
   'pascalprecht.translate',
@@ -13,6 +13,7 @@ angular.module 'eportfolioApp', [
   'restangular',      # called with RestangularProvider
   'google-maps'.ns(), # resolves to uiGmapgoogle-maps
   'geocoder',
+  'holdingMdl',
   'buildingMdl',
   'portfolioMdl',
   'observatoryMdl',
