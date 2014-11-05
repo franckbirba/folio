@@ -5,7 +5,6 @@ Resolve =
     HoldingSvc.getList()
   ]
 
-
 HoldingCfg = ($stateProvider)->
   path = 'app/holding/views/'
   $stateProvider

@@ -4,7 +4,7 @@ expect =  require('chai').expect
 app =     require '../../app'
 request = require 'supertest'
 faker =   require 'faker'
-Model =   require './holding.model'
+Model =   require './estate.model'
 
 class NestedSeed
   constructor: ()->
@@ -14,12 +14,12 @@ class Seed
   constructor: ()->
     @name = faker.company.companyName()
 
-describe 'Midway: Holding', ->
+describe 'Midway: Estate', ->
   seed = new Seed
-  path = '/api/holdings'
+  path = '/api/estates'
   id = ''
 
-  describe 'GET /api/holdings/:id', ->
+  describe 'GET /api/estates/:id', ->
     before ->
       Model.create seed, (err, res)->
         id = res._id
@@ -44,14 +44,14 @@ describe 'Midway: Holding', ->
           expect(res.body.name).to.eql seed.name
           done()
 
-  # describe 'GET /api/holdings/:id/portfolios', ->
+  # describe 'GET /api/estates/:id/portfolios', ->
   #   before ->
   #     Model.create seed, (err, res)->
   #       id = res._id
   #   after ->
   #     Model.findOne {id: id}.remove (err, res)->
   #
-  #   it 'returns the holding portfolios', (done)->
+  #   it 'returns the estate portfolios', (done)->
   #     path = "#{path}/#{id}/portfolios"
   #     request(app)
   #       .get(path)

@@ -3,22 +3,18 @@
 expect =  require('chai').expect
 app =     require '../../app'
 faker =   require 'faker'
-Lease = require './lease.model'
-
-class LeaseSeed
-  constructor: ()->
-    @name = faker.company.companyName()
-
+Model = require './lease.model'
+Mock = require './lease.mock'
 
 describe 'Unit: Lease', ->
-  lease = new Lease(new LeaseSeed)
+  mock = new Mock()
+  model = new Model(mock)
   before ->
-    lease.save()
+    model.save()
   after ->
-    Lease.findOne(lease._id).remove (err, res)->
+    Model.findOne(mock._id).remove (err, res)->
 
-  it 'has a valid Schema', (done)->
-
-    Lease.findOne {name: lease.name}, (err, doc)->
-        expect(doc.name).to.eql(lease.name)
-        done()
+  it 'saves first level attribute', (done)->
+    Model.findOne {name: model.name}, (err, doc)->
+      expect(doc.name).to.eql(mock.name)
+      done()

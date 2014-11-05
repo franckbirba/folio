@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./holding.controller');
+var controller = require('./estate.controller');
 
 var router = express.Router();
 

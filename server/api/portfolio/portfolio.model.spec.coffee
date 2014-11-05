@@ -3,22 +3,18 @@
 expect =  require('chai').expect
 app =     require '../../app'
 faker =   require 'faker'
-Portfolio = require './portfolio.model'
-
-class PortfolioSeed
-  constructor: ()->
-    @name = faker.company.companyName()
-
+Model = require './portfolio.model'
+Mock = require './portfolio.mock'
 
 describe 'Unit: Portfolio', ->
-  portfolio = new Portfolio(new PortfolioSeed)
+  mock = new Mock()
+  model = new Model(mock)
   before ->
-    portfolio.save()
+    model.save()
   after ->
-    Portfolio.findOne(portfolio._id).remove (err, res)->
+    Model.findOne(mock._id).remove (err, res)->
 
-  it 'has a valid Schema', (done)->
-
-    Portfolio.findOne {name: portfolio.name}, (err, doc)->
-        expect(doc.name).to.eql(portfolio.name)
-        done()
+  it 'saves first level attribute', (done)->
+    Model.findOne {name: model.name}, (err, doc)->
+      expect(doc.name).to.eql(mock.name)
+      done()

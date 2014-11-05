@@ -4,14 +4,22 @@ var mongoose = require('mongoose');
 var config = require(__dirname+'/../server/config/environment');
 
 //Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+// mongoose.connect(config.mongo.uri, config.mongo.options);
+var Faker = require('faker');
+
+var User = require(__dirname+'/../server/api/user/user.model');
 
 var Lease = require(__dirname+'/../server/api/lease/lease.model');
 var Portfolio = require(__dirname+'/../server/api/portfolio/portfolio.model');
 var Building = require(__dirname+'/../server/api/building/building.model');
-var User = require(__dirname+'/../server/api/user/user.model');
-var Holding = require(__dirname+'/../server/api/holding/holding.model');
-var Faker = require('faker');
+var Estate = require(__dirname+'/../server/api/estate/estate.model');
+
+var LeaseMock = require(__dirname+'/../server/api/lease/lease.mock');
+var PortfolioMock = require(__dirname+'/../server/api/portfolio/portfolio.mock');
+var BuildingMock = require(__dirname+'/../server/api/building/building.mock');
+var EstateMock = require(__dirname+'/../server/api/estate/estate.mock');
+
+
 
 var modelMap = {
   lease: Lease,
@@ -110,13 +118,6 @@ function randomBoolean(){
 /**
  * Seed functions for Models
  */
-function Address(){
-  var address = {};
-  address.address1 = Faker.address.streetAddress();
-  address.city =     Faker.address.city();
-  address.country =  Faker.address.country();
-  return address;
-}
 
 function createUsers(qty) {
   var users = [];
@@ -136,76 +137,48 @@ function createUsers(qty) {
   return users;
 }
 
-function createHolding(){
-  return new Holding({
-    name: Faker.company.companyName()
-  })
+function createHolding(qty, user){
+  var seeds = [];
+  var seed = function(){ return new LeasesMock() };
+  var model = function(){ return new Leases( seed() )};
+
+  for(var i = 0; i < qty; i++){
+    seeds.push(model);
+  }
+  return seeds;
 }
 
-function createPortfolios(qty, user){
-  var portfolios = [];
-  var newPortfolio = function(){
-    return new Portfolio({
-      name:     Faker.company.companyName(),
-      info:     Faker.company.catchPhrase(),
-      summary:  Faker.company.catchPhraseDescriptor(),
-      image:    Faker.image.imageUrl(),
-      user_id: user
-    });
-  };
+function createPortfolios(qty, user, estate){
+  var seeds = [];
+  var seed = function(){ return new PortfolioMock() };
+  var model = function(){ return new Portfolio( seed() )};
+
   for(var i = 0; i < qty; i++){
-    portfolios.push(newPortfolio());
+    seeds.push(model);
   }
-  return portfolios;
+  return seeds;
 }
 
 function createBuildings(qty, user, portfolio){
-  var buildings = [];
-  var newBuilding = function(){
-    return new Building({
-      name:    Faker.name.firstName(),
-      user_id: user,
-      portfolio: portfolio,
-      address:  new Address(),
-      info: {
-        construction_year: Faker.random.number(),
-        control: {
-          full:      randomBoolean(),
-          shared:    randomBoolean()
-        },
-        user:{
-          own_use:      randomBoolean(),
-          rented:       randomBoolean()
-        },
-        area_total:        Faker.helpers.randomNumber(),
-        area_usefull:      Faker.helpers.randomNumber(),
-        floors:            Faker.helpers.randomNumber(),
-        parking_spaces:    Faker.helpers.randomNumber(),
-        parking_surface:   Faker.helpers.randomNumber(),
-      }
-    });
-  };
+  var seeds = [];
+  var seed = function(){ return new BuildingMock() };
+  var model = function(){ return new Building( seed() )};
+
   for(var i = 0; i < qty; i++){
-    buildings.push(newBuilding());
+    seeds.push(model);
   }
-  return buildings;
+  return seeds;
 }
 
 function createLeases(qty, user, building){
-  var leases = [];
-  var newLease = function(){
-    return new Lease({
-      user_id: user,
-      building_id: building,
-      area_usefull:       Faker.random.number(),
-      floor:              Faker.random.number(),
-      name:               Faker.name.lastName()
-    })
-  };
+  var seeds = [];
+  var seed = function(){ return new LeasesMock() };
+  var model = function(){ return new Leases( seed() )};
+
   for(var i = 0; i < qty; i++){
-    leases.push(newLease());
+    seeds.push(model);
   }
-  return leases;
+  return seeds;
 }
 
 function seedDatabase(){
@@ -271,7 +244,7 @@ function defaultModels(){
   var portfolio = new Portfolio({ name: 'Model'});
   var building = new Building({ name: 'Model' });
   var lease = new Lease({name: 'Model'});
-  var holding = new Holding({name: 'Model'});
+  var estate = new Estate({name: 'Model'});
   lease.building = building._id;
   lease.save();
   building.portfolio = portfolio._id;

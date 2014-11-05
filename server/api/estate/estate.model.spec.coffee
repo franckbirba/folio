@@ -3,10 +3,10 @@
 expect =  require('chai').expect
 app =     require '../../app'
 faker =   require 'faker'
-Model = require './building.model'
-Mock = require './building.mock'
+Model = require './estate.model'
+Mock = require './estate.mock'
 
-describe 'Unit: Building', ->
+describe 'Unit: Estate', ->
   mock = new Mock()
   model = new Model(mock)
   before ->
@@ -17,9 +17,4 @@ describe 'Unit: Building', ->
   it 'saves first level attribute', (done)->
     Model.findOne {name: model.name}, (err, doc)->
       expect(doc.name).to.eql(mock.name)
-      done()
-
-  it 'saves a nested attribute', (done)->
-    Model.findOne {name: model.name}, (err, doc)->
-      expect(doc.address.country).to.eql(mock.address.country)
       done()

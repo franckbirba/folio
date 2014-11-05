@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * Holding Schema
+ * Estate Schema
  */
-var HoldingSchema = new Schema({
+var EstateSchema = new Schema({
   user_id:  { type: Schema.Types.ObjectId, ref: 'User'},
   name:       {type: String, default: ''},
   info:       {type: String, default: ''},
@@ -15,4 +15,4 @@ var HoldingSchema = new Schema({
   image:      {type: String, default: ''},
 });
 
-module.exports = mongoose.model('Holding', HoldingSchema);
+module.exports = mongoose.model('Estate', EstateSchema);
