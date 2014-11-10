@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "chai": "^1.9.2",
+    "coffee-script": "^1.8.0",
     "connect-livereload": "~0.4.0",
     "faker": "^2.0.1",
     "glob": "^4.0.6",

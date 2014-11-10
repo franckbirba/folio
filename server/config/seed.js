@@ -4,12 +4,23 @@
  */
 
 'use strict';
+var Faker = require('faker');
+var mongoose = require('mongoose')
 
 var User = require('../api/user/user.model');
 var Portfolio = require('../api/portfolio/portfolio.model');
 var Building = require('../api/building/building.model');
 var Lease = require('../api/lease/lease.model');
-var Faker = require('faker');
+// var User = mongoose.model('User'),
+//     Portfolio = mongoose.model('Portfolio'),
+//     Building = mongoose.model('Building'),
+//     Lease = mongoose.model('Lease'),
+//     Estate = mongoose.model('Estate');
+
+var LeaseMock = require('../api/lease/lease.mock'),
+    PortfolioMock = require('../api/portfolio/portfolio.mock'),
+    BuildingMock = require('../api/building/building.mock'),
+    EstateMock = require('../api/estate/estate.mock');
 
 
 /**
@@ -22,77 +33,75 @@ function randomBoolean(){
 /**
  * Seed functions for Models
  */
-function Address(){
-  var address = {};
-  address.address1 = Faker.address.streetAddress();
-  address.city =     Faker.address.city();
-  address.country =  Faker.address.country();
-  return address;
-}
 
-function createPortfolios(qty){
-  var portfolios = [];
-  var newPortfolio = function(){
-    return new Portfolio({
-      name:     Faker.company.companyName(),
-      info:     Faker.company.catchPhrase(),
-      summary:  Faker.company.catchPhraseDescriptor(),
-      image:    Faker.image.imageUrl()
-    });
-  };
-  for(var i = 0; i < qty; i++){
-    portfolios.push(newPortfolio());
-  }
-  return portfolios;
-}
-
-function createBuildings(qty){
-  var buildings = [];
-  var newBuilding = function(){
-    return new Building({
-      name:    Faker.name.firstName(),
-      address:  new Address(),
-      info: {
-        construction_year: Faker.random.number(),
-        control: {
-          full:      randomBoolean(),
-          shared:    randomBoolean()
-        },
-        user:{
-          own_use:      randomBoolean(),
-          rented:       randomBoolean()
-        },
-        area_total:        Faker.helpers.randomNumber(),
-        area_usefull:      Faker.helpers.randomNumber(),
-        floors:            Faker.helpers.randomNumber(),
-        parking_spaces:    Faker.helpers.randomNumber(),
-        parking_surface:   Faker.helpers.randomNumber(),
+function createUsers(){
+  User.find({}).remove(function() {
+    User.create({
+      provider: 'local',
+      name: 'Test User',
+      email: 'test@test.com',
+      password: 'test'
+    }, {
+      provider: 'local',
+      role: 'admin',
+      name: 'Admin',
+      email: 'admin@admin.com',
+      password: 'admin'
+    }, function() {
+        console.log('finished populating users');
       }
-    });
-  };
-  for(var i = 0; i < qty; i++){
-    buildings.push(newBuilding());
-  }
-  return buildings;
+    );
+  });
 }
 
-function createLeases(qty){
-  var leases = [];
-  var newLease = function(){
-    return new Lease({
-      area_usefull:       Faker.random.number(),
-      floor:              Faker.random.number(),
-      name:               Faker.name.lastName()
-    })
-  };
+function createEstates(qty, user, estate){
+  var seeds = [];
+  var seed = function(){ return new EstateMock() };
+  var model = function(){ return new Estate( seed() )};
+
   for(var i = 0; i < qty; i++){
-    leases.push(newLease());
+    seeds.push(model());
   }
-  return leases;
+  return seeds;
 }
 
-function seedDatabase(){
+function createPortfolios(qty, user, estate){
+  var seeds = [];
+  var seed = function(){ return new PortfolioMock() };
+  var model = function(){ return new Portfolio( seed() )};
+
+  for(var i = 0; i < qty; i++){
+    seeds.push(model());
+  }
+  return seeds;
+}
+
+function createBuildings(qty, user, portfolio){
+  var seeds = [];
+  var seed = function(){ return new BuildingMock() };
+  var model = function(){ return new Building( seed() )};
+
+  for(var i = 0; i < qty; i++){
+    seeds.push(model());
+  }
+  return seeds;
+}
+
+function createLeases(qty, user, building){
+  var seeds = [];
+  var seed = function(){ return new LeaseMock() };
+  var model = function(){ return new Lease( seed() )};
+
+  for(var i = 0; i < qty; i++){
+    seeds.push(model());
+  }
+  return seeds;
+}
+
+
+function seedModels(){
   var portfolios = createPortfolios(3);
+
   portfolios.forEach(function(portfolio){
     var buildings = createBuildings(3);
     buildings.forEach(function(building){
@@ -114,43 +123,39 @@ function seedDatabase(){
   // or async call
 }
 
+var Seed = function(){
+  console.log('hello from seed')
+  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+  var db = mongoose.createConnection('mongodb://localhost/eportfolio-dev');
+  db.on('error', function (err) {
+    console.log('connection error\n', err);
+    db.disconnect();
+  });
+  db.on('open', function (res) {
+    console.log('connection success');
+    seedDatabase();
+    db.disconnect();
+    console.log('finished seeding db');
+});
+}
 
 /*
 ** Create default Models
 */
-function defaultModels(){
-  var portfolio = new Portfolio({ name: 'Model'});
-  var building = new Building({ name: 'Model' });
-  var lease = new Lease({name: 'Model'});
-  lease.building = building._id;
-  lease.save();
-  building.portfolio = portfolio._id;
-  building.save();
-  portfolio.building = building._id;
-  portfolio.save();
-  console.log('finished populating schemas');
-}
+// function defaultModels(){
+//   var portfolio = new Portfolio({ name: 'Model'});
+//   var building = new Building({ name: 'Model' });
+//   var lease = new Lease({name: 'Model'});
+//   lease.building = building._id;
+//   lease.save();
+//   building.portfolio = portfolio._id;
+//   building.save();
+//   portfolio.building = building._id;
+//   portfolio.save();
+//   console.log('finished populating schemas');
+// }
 
 /*
 ** Run Seed scripts
 */
-seedDatabase();
-defaultModels();
-
-User.find({}).remove(function() {
-  User.create({
-    provider: 'local',
-    name: 'Test User',
-    email: 'test@test.com',
-    password: 'test'
-  }, {
-    provider: 'local',
-    role: 'admin',
-    name: 'Admin',
-    email: 'admin@admin.com',
-    password: 'admin'
-  }, function() {
-      console.log('finished populating users');
-    }
-  );
-});
+module.exports = Seed
